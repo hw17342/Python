@@ -1,0 +1,4116 @@
+%
+\documentclass[10pt]{article}
+
+    
+\usepackage[scaled=0.95]{uarial}
+\usepackage[scaled=1.0]{newtxmath}
+\renewcommand*\familydefault{\sfdefault}
+
+    \usepackage[T1]{fontenc}
+   % Nicer default font (+ math font) than Computer Modern for most use cases
+%    \usepackage{mathpazo}
+
+%\setlength{\parskip}{2ex plus 1ex minus 0.5ex}
+\usepackage{parskip}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+\graphicspath{{./figures/}}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    %\let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    %\renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{PythonTutorial\_v1.5}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+%    \maketitle
+    
+
+    
+    \hypertarget{introduction-to-computer-programming-in-python}{%
+\section*{Introduction to Computer Programming in
+Python}\label{introduction-to-computer-programming-in-python}}
+
+    Dr.~Simon Hanna \\
+    Room: 3.44, email: s.hanna@bristol.ac.uk \\
+    Version 1.5 \\
+    Last update: 29/05/2018
+
+    \tableofcontents
+
+
+    \hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+%\addcontentsline{toc}{section}{1 Introduction}
+    \hypertarget{structure-of-course}{%
+\subsection{Structure of course}\label{structure-of-course}}
+
+    \hypertarget{instruction}{%
+\subsubsection*{1.1.1 Instruction}\label{instruction}}
+
+\begin{itemize}
+\tightlist
+\item
+  6 x 1 hour lectures, which will introduce the Python language, and
+  discuss various computational methods.
+\item
+  This Python tutorial document (which includes some self-assessment
+  exercises).
+\item
+  A series of 2 hour drop-in sessions in Physics Rm 1.14, at various
+  times during the Autumn and Spring terms, so that students can get
+  help with their own code.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Demonstrators will be available during these help sessions.
+  \item
+    Please direct questions to the demonstrators during these help
+    sessions.
+  \end{itemize}
+\end{itemize}
+
+    \hypertarget{assessment}{%
+\subsubsection*{1.1.2 Assessment}\label{assessment}}
+
+\begin{itemize}
+\tightlist
+\item
+  There are 4 assessed exercises and 4 online tests.
+\item
+  Each exercise will be worth 20\% of the mark for the level 5 course
+  (different weightings apply to the level 6 course).
+\item
+  Marks will be given for functionality but also programming style. Is
+  the code efficient and well set out (use comments)? Is the code
+  efficient, easy to understand and logically laid out?
+\item
+  \textbf{Note that plagiarism will be checked for electronically.}
+\end{itemize}
+
+Detection of plagiarism will normally result in:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  award of mark of zero
+\item
+  repeat exercises
+\item
+  a note on your record
+\end{enumerate}
+
+\emph{Don't do it\ldots{}.you will be caught!}
+
+    \hypertarget{submiting-your-code}{%
+\subsubsection*{1.1.3 Submiting your code}\label{submiting-your-code}}
+
+\begin{itemize}
+\tightlist
+\item
+  Submit your Python scripts via Blackboard.
+\item
+  Submit ONLY a single .py file for each problem set.
+\item
+  Only use Python version 3.x, as documented in these notes. (The
+  current version is 3.6.5). Python 2.x is very old and should not be
+  used for new programs. Python 3.x will be available using Anaconda on
+  the 1.14 computers.
+\item
+  The deadlines for the first exercises will be given on Blackboard and
+  in lectures.
+\item
+  Standard faculty penalties for late work will be applied.
+\end{itemize}
+
+    \hypertarget{learning-objectives}{%
+\subsection{Learning Objectives}\label{learning-objectives}}
+
+To become proficient at writing simple computer code using the Python
+programming language. Specifically the course will cover:
+
+\begin{itemize}
+\tightlist
+\item
+  Simple variables and objects
+\item
+  Operators
+\item
+  Branching
+\item
+  Looping
+\item
+  Input and output: console/keyboard and also via files
+\item
+  String manipulation
+\item
+  Functions
+\item
+  Arrays as defined in the \texttt{NumPy} module
+\item
+  Graph plotting
+\end{itemize}
+
+    \hypertarget{why-learn-python}{%
+\subsection{Why learn Python?}\label{why-learn-python}}
+
+Computer programming has many uses in physics: * Solving problems
+numerically (virtually all real world physics problems are solved
+numerically) * Controlling equipment * Processing data, generating
+graphs etc.
+
+Python is an increasingly popular programming language, that combines
+flexibility with ease of learning and use. It is extremely well
+supported for scientific and mathematical applications, and contains
+modules for performing a wide range of numerical analyses and for
+generating high quality graphical output. There is a wealth of books and
+online tutorials available to help get you started.
+
+    \hypertarget{books-and-online-resources}{%
+\subsection{Books and online
+resources}\label{books-and-online-resources}}
+
+There are countless books available for learning Python. You should look
+for an up-to-date text that focuses on Python 3.x. Two recent books that
+teach the language in the context of physical problem solving are:
+
+\includegraphics[scale=0.3]{KinderNelson.png} \includegraphics[scale=0.55]{Hill.jpg}
+
+\begin{itemize}
+%\tightlist
+\item\href{https://press.princeton.edu/titles/11349.html}{Jesse Kinder \&
+Philip Nelson: ``A Student's Guide to Python for Physical Modelling''
+(Princeton University Press, Updated edition, 2018)} A fairly short
+introduction that, however, covers all of the programming needed for the
+course, including the use of \texttt{NumPy} and \texttt{MatPlotLib}.
+
+\item\href{http://www.cambridge.org/gb/academic/subjects/physics/computational-science-and-modelling/learning-scientific-programming-python?format=PB}{Christian
+Hill: ``Learning Scientific Programming with Python'' (Cambridge
+University Press, 2016)} A more comprehensive text than Kinder \& Nelson
+which is more useful for looking things up, but takes longer to read.
+\end{itemize}
+
+Then there is the Python tutorial from the Python Software Foundation:
+
+\begin{itemize}
+\tightlist
+\item
+  https://docs.python.org/3.6/tutorial/ \includegraphics[scale=0.3]{python-logo.png}
+\end{itemize}
+
+and various online lectures, such as those by Robert Johansson that are
+based on IPython (Jupyter) notebooks:
+
+\begin{itemize}
+\tightlist
+\item
+  https://github.com/jrjohansson/scientific-python-lectures
+\end{itemize}
+
+    \hypertarget{hardware-software}{%
+\subsection{Hardware / Software}\label{hardware-software}}
+
+This course will focus (mainly) on standard Python 3.x and so can be run
+on any computer with a Python installation, i.e.~a Windows PC, Apple Mac
+or Linux system.
+
+An Integrated Development Environment (IDE) is strictly not needed. You
+could just use a text editor (e.g.~notepad) and run Python from the
+command line.
+
+BUT, an IDE does make life a lot easier.
+
+We will be using the Spyder IDE, available as part of the Anaconda
+distribution, available for free download from
+\href{https://www.anaconda.com/downloads}{Anaconda Inc}. Anaconda and
+Spyder will be found on the PCs in Physics Rm 1.14.
+
+    \hypertarget{installing-spyder-python-3.6}{%
+\subsection{Installing Spyder + Python
+3.6}\label{installing-spyder-python-3.6}}
+
+Download Anaconda, complete with Python 3.6.5, directly from
+\href{https://www.anaconda.com/downloads}{Anaconda Inc}, for your
+particular computer hardware. The latest version is Anaconda 5.1. Unless
+you have good reason to choose otherwise, you should choose the
+\emph{Graphical Installer}. Follow the instructions given on the
+web-page, and accept the default installation. After the installation is
+complete, you will be left with a ``Navigator'' program which allows you
+to start up:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  the Spyder IDE (scientific Python development environment);
+\item
+  the Jupyter notebook system, formerly known as IPython notebooks (as
+  used for these notes);
+\item
+  the Jupyter Qt console, a way of running interactive Python (IPython);
+\item
+  a few other utilities that you can ignore.
+\end{enumerate}
+
+This is how the Navigator should look:
+
+\includegraphics[width=0.9\maxwidth]{Navigator.png}
+
+You now have several different ways of running Python:
+
+\begin{itemize}
+\tightlist
+\item
+  by typing Python statements in the Qt console
+\item
+  by executing Python code within a Jupyter notebook
+\item
+  within the Spyder IDE, typing and running scripts in the editing
+  window
+\item
+  within the Spyder IDE, typing Python code in the IPython console
+  window
+\end{itemize}
+
+Here is an example of Spyder in action: 
+
+\includegraphics[width=0.9\maxwidth]{Spyder.png}
+
+    \hypertarget{starting-out-using-python}{%
+\section{Starting out: Using Python}\label{starting-out-using-python}}
+
+\hypertarget{viewing-this-tutorial-in-jupyter-notebook}{%
+\subsection{Viewing this tutorial in Jupyter
+Notebook}\label{viewing-this-tutorial-in-jupyter-notebook}}
+
+As indicated above, there are several different ways of running Python
+code. This tutorial contains many snippets of code. If you are viewing
+this tutorial using the Jupyter notebook, you will be able to run, and
+re-run, the code snippets within the web-page, modifying and testing as
+you go.
+
+To launch Jupyter Notebook, first launch the Anaconda Navigator and then
+click on the appropriate button for Jupyter. Either the Jupyter Lab or
+the Jupyter Notebook will work. Whichever you choose will launch a
+web-browser, which will present you with a view of your files on your
+computer. You should click through to the folder containing this
+tutorial, and finally select the file \emph{PythonTutorial\_v1.5.ipynb}.
+
+You should now see an interactive version of this tutorial in your
+web-browser. To run the code below, just click in the code cell and hit
+\texttt{"Shift-Enter"} or press the ``Play'' button in the toolbar
+above:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}}
+        \PY{c+c1}{\PYZsh{} My first Python program}
+        \PY{c+c1}{\PYZsh{}}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hello, world!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Hello, world!
+
+    \end{Verbatim}
+
+    In the above program, \texttt{"print()"} is a built-in Python function
+for printing to the screen, and the lines beginning with hashes (\#) are
+comments, and are not executed.
+
+    \hypertarget{using-the-scientific-python-development-environment-spyder}{%
+\subsection{Using the scientific Python development environment
+(Spyder)}\label{using-the-scientific-python-development-environment-spyder}}
+
+However, a more permanent approach to coding is to write code into a
+file (a Python script). You can do this within Spyder, and see both the
+code and the result of running it in the same window. Spyder has another
+big advantage: the \texttt{Variable\ Explorer} tab allows you to keep
+track of all variables while your program is running, which is extremely
+useful for fixing errors.
+
+Create a new Python script, by choosing
+\texttt{"File\ -\/-\textgreater{}\ New\ file..."} in the Spyder (python)
+menu. The new script should open in a tab in the left-hand window. Be
+sure to save the script in an appropriate folder; all python scripts
+should have the \texttt{.py} filename extension.
+
+Copy the lines of code from the cell above into your file. Re-save the
+file and run it either by: * clicking the play button; * choosing
+\texttt{"Run\ -\/-\textgreater{}\ Run"} in the spyder menu; * hitting
+\texttt{"F5"} on the keyboard.
+
+Observe the output from your program in the IPython console window
+(bottom right of screen).
+
+    \hypertarget{runtime-errors}{%
+\subsection{Runtime errors}\label{runtime-errors}}
+
+If you make a mistake in typing your Python program, Python won't know
+how to execute your code. When this happens, Python will issue one or
+more error messages, such as the following:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} My first (broken) Python program}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{prnt}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hello, world!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        NameError                                 Traceback (most recent call last)
+
+        <ipython-input-11-2cabc433e5bb> in <module>()
+          2 \# My first (broken) Python program
+          3 \#
+    ----> 4 prnt("Hello, world!")
+    
+
+        NameError: name 'prnt' is not defined
+
+    \end{Verbatim}
+
+    In this case, the user has typed \texttt{"prnt"} instead of
+\texttt{"print"}. Python does not recognise \texttt{"prnt"} and says so.
+If you correct the error in the code above, and re-run the cell, the
+error message will go away.
+
+\emph{Sometimes, a simple error can cause a flurry of error messages to
+appear. Don't worry if this happens. Always try to address the
+\textbf{last} message you see, and many of the others should simply
+disappear.}
+
+    \hypertarget{the-python-programming-language-a-very-brief-introduction}{%
+\section{The Python programming language: a very brief
+introduction}\label{the-python-programming-language-a-very-brief-introduction}}
+
+\hypertarget{variables-and-objects}{%
+\subsection{Variables and Objects}\label{variables-and-objects}}
+
+\hypertarget{introduction}{%
+\subsubsection*{3.1.1 Introduction}\label{introduction}}
+
+Variables represent computer memory spaces which store data. A variable
+has a name, which usually consists of one or more letters or numbers,
+beginning with a letter, and a value. Variables are created
+automatically, as needed. e.g.:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{i}\PY{o}{=}\PY{l+m+mi}{1212}
+        \PY{n}{j}\PY{o}{=}\PY{l+m+mi}{3}
+        \PY{n}{k}\PY{o}{=}\PY{n}{i}\PY{o}{*}\PY{n}{j}
+        \PY{n}{x}\PY{o}{=}\PY{l+m+mf}{34523.34535}
+        \PY{n}{part2}\PY{o}{=}\PY{l+m+mf}{1.234e21} \PY{c+c1}{\PYZsh{} i.e. 1.234 times 10 to the power 21}
+        \PY{n}{z} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{+}\PY{l+m+mi}{2}\PY{n}{j}  \PY{c+c1}{\PYZsh{} j is the square root of \PYZhy{}1}
+        \PY{n}{name1} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fred}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n+nb}{print} \PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{,} \PY{n}{k}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{part2}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{name1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1212 3 3636 34523.34535 1.234e+21 (1+2j) Fred
+
+    \end{Verbatim}
+
+    The variables above are called \texttt{i}, \texttt{j}, \texttt{k},
+\texttt{x}, \texttt{part2}, \texttt{z} and \texttt{name1}. 
+\begin{itemize}
+%\tightlist
+\item Variables
+in Python are also ``objects''.
+\item An object contains both \emph{attributes} such as the value of the
+variable, and \emph{methods} which are functions returning more
+information about the object.
+\item A list of the available methods and attributes for any object is given
+by the \texttt{dir(object\_name)} command. For example, if you execute
+the following code, you will see a list of almost 50 methods and
+attributes, ending with the \texttt{z.conjugate()} method and the
+\texttt{z.real} and \texttt{z.imag} attributes which will be of use (see
+below).
+
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{z} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{+} \PY{l+m+mi}{2}\PY{n}{j}
+        \PY{n+nb}{dir}\PY{p}{(}\PY{n}{z}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} ['\_\_abs\_\_',
+         '\_\_add\_\_',
+         '\_\_bool\_\_',
+         '\_\_class\_\_',
+         '\_\_delattr\_\_',
+         '\_\_dir\_\_',
+         '\_\_divmod\_\_',
+         '\_\_doc\_\_',
+         '\_\_eq\_\_',
+         '\_\_float\_\_',
+         '\_\_floordiv\_\_',
+         '\_\_format\_\_',
+         '\_\_ge\_\_',
+         '\_\_getattribute\_\_',
+         '\_\_getnewargs\_\_',
+         '\_\_gt\_\_',
+         '\_\_hash\_\_',
+         '\_\_init\_\_',
+         '\_\_init\_subclass\_\_',
+         '\_\_int\_\_',
+         '\_\_le\_\_',
+         '\_\_lt\_\_',
+         '\_\_mod\_\_',
+         '\_\_mul\_\_',
+         '\_\_ne\_\_',
+         '\_\_neg\_\_',
+         '\_\_new\_\_',
+         '\_\_pos\_\_',
+         '\_\_pow\_\_',
+         '\_\_radd\_\_',
+         '\_\_rdivmod\_\_',
+         '\_\_reduce\_\_',
+         '\_\_reduce\_ex\_\_',
+         '\_\_repr\_\_',
+         '\_\_rfloordiv\_\_',
+         '\_\_rmod\_\_',
+         '\_\_rmul\_\_',
+         '\_\_rpow\_\_',
+         '\_\_rsub\_\_',
+         '\_\_rtruediv\_\_',
+         '\_\_setattr\_\_',
+         '\_\_sizeof\_\_',
+         '\_\_str\_\_',
+         '\_\_sub\_\_',
+         '\_\_subclasshook\_\_',
+         '\_\_truediv\_\_',
+         'conjugate',
+         'imag',
+         'real']
+\end{Verbatim}
+            
+    \hypertarget{different-types-of-data}{%
+\subsubsection*{3.1.2 Different types of
+data}\label{different-types-of-data}}
+
+\hypertarget{the-basic-data-types}{%
+\paragraph{The basic data types:}\label{the-basic-data-types}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{integer:} (type \texttt{int}) for storing positive or negative
+  integers. Integers are stored exactly, using as much memory as
+  necessary to represent all of the digits.
+\item
+  \textbf{floating point:} (type \texttt{float}) used to represent
+  floating point numbers. The memory used is fixed, with typically only
+  15 significant figures available.
+\item
+  \textbf{complex:} using the format \texttt{1+2j}, where \texttt{j}
+  \(=\sqrt{-1}\). Note the lack of any operator between the imaginary
+  part and \texttt{j}. The \texttt{complex} object is constructed from 2
+  \texttt{float} objects.
+\item
+  \textbf{string:} (type \texttt{str}) for storing a string of
+  characters e.g. `Fred', `Hello World!'.
+\end{itemize}
+
+\hypertarget{more-sophisticated-data-types}{%
+\paragraph{More sophisticated data
+types:}\label{more-sophisticated-data-types}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{list:} a sequence of arbitrary objects, enclosed between
+  square brackets e.g. \texttt{{[}1,\ 2.3,\ "Hello"{]}}.
+\item
+  \textbf{tuple:} like a list but cannot be changed after creation
+  (immutable), specified using round brackets e.g.
+  \texttt{("AAPL",\ 3.14,\ 100)}.
+\item
+  \textbf{set:} an unordered collection of objects, created with the
+  \texttt{set()} function.
+\item
+  \textbf{dictionary:} a type of table that associates names with
+  values.
+\end{itemize}
+
+\hypertarget{changing-data-types}{%
+\subsubsection*{3.1.3 Changing data types}\label{changing-data-types}}
+
+The functions \texttt{int()}, \texttt{float()} and \texttt{str()} are
+used to convert between data types. For example:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{x} \PY{o}{=} \PY{l+m+mf}{3.14159}
+        \PY{n}{y} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+        \PY{n}{z} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+        \PY{n}{w} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{w}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+3.14159 3 3.14159 3.0
+
+    \end{Verbatim}
+
+    \texttt{y} is the integer part of \texttt{x}, and \texttt{w} is
+\texttt{y} turned back into floating point.
+
+It is not obvious in the above that \texttt{z} is a string. However, the
+following sum should make it clearer:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{u} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A string version of pi: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{z}
+        \PY{n+nb}{print} \PY{p}{(}\PY{n}{u}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+A string version of pi: 3.14159
+
+    \end{Verbatim}
+
+    \hypertarget{object-methods}{%
+\subsubsection*{3.1.4 Object methods}\label{object-methods}}
+
+This is best illustrated by example. If the variable \texttt{z} is a
+complex number, it is also a complex number \emph{object}; the complex
+conjugate of \texttt{z} is available using the \texttt{conjugate()}
+\emph{method}, as in:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n}{z} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{+} \PY{l+m+mi}{2}\PY{n}{j}
+        \PY{n+nb}{print} \PY{p}{(} \PY{n}{z}\PY{o}{.}\PY{n}{conjugate}\PY{p}{(}\PY{p}{)} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(1-2j)
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Note the need for brackets even though \texttt{z.conjugate()} has no
+  arguments. They are needed because methods are functions which compute
+  and return information relating to the object.
+\item
+  Whenever an object is created, its methods will be available using the
+  syntax: \texttt{object\_name.method()}.
+\end{itemize}
+
+\hypertarget{object-attributes}{%
+\subsubsection*{3.1.5 Object attributes}\label{object-attributes}}
+
+In addition, objects possess \emph{attributes}, which are stored and do
+not need to be computed using a method. In the case of the complex
+number object, attributes would include the value of the variable, and
+the values of its real and imaginary parts. Attributes are used with a
+similar syntax to methods, but without the brackets i.e.
+\texttt{object\_name.attribute}. For example, attributes of the complex
+object would include the real and imaginary parts:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n+nb}{print} \PY{p}{(} \PY{n}{z}\PY{o}{.}\PY{n}{real}\PY{p}{,} \PY{n}{z}\PY{o}{.}\PY{n}{imag}\PY{p}{,} \PY{n}{z}\PY{o}{.}\PY{n}{conjugate}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{imag} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1.0 2.0 -2.0
+
+    \end{Verbatim}
+
+    \hypertarget{writing-code}{%
+\subsection{Writing code}\label{writing-code}}
+
+\hypertarget{case-sensitivity}{%
+\subsubsection*{3.2.1 Case Sensitivity}\label{case-sensitivity}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{NOTE} that Python is case sensitive !!
+\item
+  So \texttt{width} and \texttt{Width} are two different variables.
+\item
+  also \texttt{Print()} is not a function in standard Python but
+  \texttt{print()} is.
+\end{itemize}
+
+\hypertarget{comments}{%
+\subsubsection*{3.2.2 Comments}\label{comments}}
+
+\begin{itemize}
+\tightlist
+\item
+  Appropriate use of comments is a very important element of good
+  programming style.
+\item
+  Comments are simple English statements which explain what a particular
+  piece of code does, or gives other information: For example -- who
+  wrote the code.
+\item
+  You can also use comments to temporarily take out bits of unused code
+  (e.g.~for debugging or other testing purposes).
+\item
+  There are two ways of making comments, these are illustrated below:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}}
+        \PY{c+c1}{\PYZsh{} This program written 6th April 2016 by SH}
+        \PY{c+c1}{\PYZsh{}}
+        \PY{c+c1}{\PYZsh{} This is a single line comment.}
+        \PY{c+c1}{\PYZsh{} This is another.}
+        \PY{c+c1}{\PYZsh{}}
+        \PY{c+c1}{\PYZsh{} This is the definition of a function:}
+        \PY{k}{def} \PY{n+nf}{myfunc}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}This function returns the sum of the squares of a and b. This text}
+        \PY{l+s+sd}{    can be split across several lines, and acts as an extended comment.}
+        \PY{l+s+sd}{    However, it has another use, when used with the `help()` command (see below).\PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{c} \PY{o}{=} \PY{n}{a}\PY{o}{*}\PY{n}{a} \PY{o}{+} \PY{n}{b}\PY{o}{*}\PY{n}{b}
+            \PY{k}{return} \PY{n}{c}  \PY{c+c1}{\PYZsh{} Comments can appear anywhere in a line}
+        
+        \PY{c+c1}{\PYZsh{} Test the function:}
+        \PY{n+nb}{print}\PY{p}{(} \PY{n}{myfunc}\PY{p}{(}\PY{l+m+mf}{3.0}\PY{p}{,} \PY{l+m+mf}{4.0}\PY{p}{)}\PY{p}{,} \PY{n}{myfunc}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}  \PY{c+c1}{\PYZsh{} The function works for integers and floats}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+25.0 5
+
+    \end{Verbatim}
+
+    The comment between the double triple-double quotations is known as a
+\texttt{docstring} because it provides documentation for the function.
+It can be accessed as follows: \begin{enumerate}
+\item  Using the help command, which produces
+a nicely formatted piece of text; \item Printing the \texttt{\_\_doc\_\_}
+attribute of the \texttt{myfunc} object.
+\end{enumerate}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{help} \PY{p}{(}\PY{n}{myfunc}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{myfunc}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}doc\PYZus{}\PYZus{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+------
+Help on function myfunc in module \_\_main\_\_:
+
+myfunc(a, b)
+    This function returns the sum of the squares of a and b. This text
+    can be split across several lines, and acts as an extended comment.
+    However, it has another use, when used with the `help()` command (see below).
+
+------
+This function returns the sum of the squares of a and b. This text
+    can be split across several lines, and acts as an extended comment.
+    However, it has another use, when used with the `help()` command (see below).
+------
+
+    \end{Verbatim}
+
+    \hypertarget{floating-point-limits}{%
+\subsubsection*{3.2.3 Floating Point
+Limits}\label{floating-point-limits}}
+
+These depend on the computer and the version of Python being used. You
+can find limits for your system by importing the \texttt{sys} module,
+and looking at appropriate attributes of \texttt{sys.float\_info} as
+follows:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{import} \PY{n+nn}{sys}
+        
+        \PY{n+nb}{print}\PY{p}{(} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Smallest fractional difference between two floats: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sys}\PY{o}{.}\PY{n}{float\PYZus{}info}\PY{o}{.}\PY{n}{epsilon} \PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of digits precision: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sys}\PY{o}{.}\PY{n}{float\PYZus{}info}\PY{o}{.}\PY{n}{dig} \PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Largest floating point number: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sys}\PY{o}{.}\PY{n}{float\PYZus{}info}\PY{o}{.}\PY{n}{max} \PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Smallest floating point number: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sys}\PY{o}{.}\PY{n}{float\PYZus{}info}\PY{o}{.}\PY{n}{min} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Smallest fractional difference between two floats:  2.220446049250313e-16
+Number of digits precision:  15
+Largest floating point number:  1.7976931348623157e+308
+Smallest floating point number:  2.2250738585072014e-308
+
+    \end{Verbatim}
+
+    It is important to be aware of these limits when writing programs.
+Having only 15 digits of precision can lead to numerical errors in
+poorly crafted algorithms, while exceeding the largest or smallest
+allowed numbers can lead to a program crashing.
+
+\hypertarget{input-and-output}{%
+\subsection{Input and Output}\label{input-and-output}}
+
+\hypertarget{writing-to-screen}{%
+\subsubsection*{3.3.1 Writing to screen}\label{writing-to-screen}}
+
+Use the \texttt{print()} function to write output to the screen, as
+already demonstrated above. However, to gain more control over the
+operation of \texttt{print()}, you need to be able to be able to
+\textbf{format} the numbers being printed. There are several ways to
+achieve this. Below we illustrate the \texttt{format()} method that
+belongs to any string variable, and the \texttt{\%} operator:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{pi} \PY{o}{=} \PY{l+m+mf}{3.14159265358979}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1) Pi is approximately }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{pi}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2) Pi is approximately }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{pi}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}}
+        \PY{c+c1}{\PYZsh{} The format() method}
+        \PY{c+c1}{\PYZsh{}}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3) }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ is roughly }\PY{l+s+si}{\PYZob{}:.5f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{pi}\PY{p}{)}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Format \PYZdq{}.5f\PYZdq{} means floating point with}
+                                                       \PY{c+c1}{\PYZsh{} 5 decimal places}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{4) }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ is roughly }\PY{l+s+si}{\PYZob{}:9.5f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{pi}\PY{p}{)}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Format \PYZdq{}9.5f\PYZdq{} means floating point with}
+                                                       \PY{c+c1}{\PYZsh{} 5 decimal places, and 9 characters in total}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{5) }\PY{l+s+si}{\PYZob{}1:.5f\PYZcb{}}\PY{l+s+s1}{ is roughly the value of }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{pi}\PY{p}{)}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Note order of arguments}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}}
+        \PY{c+c1}{\PYZsh{} The percent operator}
+        \PY{c+c1}{\PYZsh{}}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{6) }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{ is around about }\PY{l+s+si}{\PYZpc{}.4g}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{pi}\PY{p}{)}\PY{p}{)}
+        \PY{n}{a} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{7) }\PY{l+s+si}{\PYZpc{}.4g}\PY{l+s+s1}{ is around about the value of }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{b} \PY{o}{=} \PY{n}{a} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{pi}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}}
+        \PY{c+c1}{\PYZsh{} Different field widths}
+        \PY{c+c1}{\PYZsh{}}
+        \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{5}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}1d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}2d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}3d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}4d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}5d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1) Pi is approximately  3.14159265358979
+2) Pi is approximately 3.14159265358979
+-----
+3) Pi is roughly 3.14159
+4) Pi is roughly   3.14159
+5) 3.14159 is roughly the value of Pi
+-----
+6) pi is around about 3.142
+7) 3.142 is around about the value of pi
+-----
+5
+ 5
+  5
+   5
+    5
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  The \texttt{format()} method belongs to all string objects. Arguments
+  are inserted into the string in the order specified between the curly
+  brackets e.g.\texttt{\{1:.5f\}} means \emph{insert the 2nd argument
+  (counting from zero) at this point, format it as a float with 5 d.p.}
+  It's use is \textbf{not} restricted to the \texttt{print()} function.
+\item
+  The \texttt{\%} operator will operate on any string as well, but the
+  arguments must be specified in the order they are needed.
+\item
+  Other format specifiers are:
+\begin{itemize}
+\item 
+  \texttt{d} for a decimal integer
+\item
+  \texttt{b} for a binary integer
+\item
+  \texttt{x} for a hexadecimal integer
+\item
+  \texttt{s} for a string
+\item
+  \texttt{g} for general format in the smallest amount of space
+\item
+  \texttt{f} for a floating point number
+
+\end{itemize}
+\end{itemize}
+
+    \hypertarget{input-from-keyboard}{%
+\subsubsection*{3.3.2 Input from keyboard}\label{input-from-keyboard}}
+
+Use the \texttt{input()} function to obtain a string from the keyboard,
+which you must convert to a number using \texttt{float()} or
+\texttt{int()}. Try the following program:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{MyNumber} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+         \PY{k}{while} \PY{n}{MyNumber} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0} \PY{o+ow}{or} \PY{n}{MyNumber} \PY{o}{\PYZgt{}} \PY{l+m+mi}{10}\PY{p}{:}
+             \PY{n}{MyInput} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Enter a number in the range 0 to 10: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{MyNumber} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{MyInput}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{You entered the number: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{MyNumber}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Thank you}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Enter a number in the range 0 to 10: 11
+You entered the number:  11.0
+Enter a number in the range 0 to 10: -4
+You entered the number:  -4.0
+Enter a number in the range 0 to 10: 12
+You entered the number:  12.0
+Enter a number in the range 0 to 10: 6
+You entered the number:  6.0
+Thank you
+
+    \end{Verbatim}
+
+    Note the use of a \texttt{while} loop to ensure the user enters a number
+in the correct range (see later).
+
+    \hypertarget{doing-maths}{%
+\subsection{Doing Maths}\label{doing-maths}}
+
+\hypertarget{mathematical-operators}{%
+\subsubsection*{3.4.1 Mathematical Operators}\label{mathematical-operators}}
+
+\includegraphics[width=0.6\maxwidth]{MathOperators.png}
+
+Examples:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n}{i} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{3} \PY{o}{+} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{2}      \PY{c+c1}{\PYZsh{} i.e. i = 10}
+        \PY{n}{j} \PY{o}{=} \PY{l+m+mi}{3}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{j = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{j}) \PYZsh{} divides i by j and returns the remainder (e.g., 10\PYZpc{}3 = 1)
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i/j = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{i}\PY{o}{/}\PY{n}{j}\PY{p}{)} \PY{c+c1}{\PYZsh{} floating point division, result is \PYZsq{}float\PYZsq{}}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i//j = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{i}\PY{o}{/}\PY{o}{/}\PY{n}{j}\PY{p}{)} \PY{c+c1}{\PYZsh{} integer division, result is \PYZsq{}int\PYZsq{}}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i**j = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{i}\PY{o}{*}\PY{o}{*}\PY{n}{j}\PY{p}{)} \PY{c+c1}{\PYZsh{} raising to a power}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+i\%j =  1
+i/j =  3.3333333333333335
+i//j =  3
+i**j =  1000
+
+    \end{Verbatim}
+
+    \hypertarget{operator-shorthand}{%
+\subsubsection*{3.4.2 Operator Shorthand}\label{operator-shorthand}}
+\includegraphics[width=0.3\maxwidth]{MathOperatorShorthand.png}
+
+In each of the above statements, the right-hand-side is evaluated taking
+the current values of \texttt{a} and \texttt{b}, and the result is
+placed back in the variable \texttt{a}. For example:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{100}
+        \PY{n}{b} \PY{o}{=} \PY{l+m+mi}{9}
+        \PY{n}{a} \PY{o}{+}\PY{o}{=} \PY{n}{b}
+        \PY{n+nb}{print} \PY{p}{(}\PY{n}{a}\PY{p}{)}
+        \PY{n}{a} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{b}
+        \PY{n+nb}{print} \PY{p}{(}\PY{n}{a}\PY{p}{)}
+        \PY{n}{a} \PY{o}{*}\PY{o}{=} \PY{n}{b}
+        \PY{n+nb}{print} \PY{p}{(}\PY{n}{a}\PY{p}{)}
+        \PY{n}{a} \PY{o}{/}\PY{o}{=} \PY{n}{b}
+        \PY{n+nb}{print} \PY{p}{(}\PY{n}{a}\PY{p}{)}
+        \PY{n}{a} \PY{o}{\PYZpc{}}\PY{o}{=} \PY{n}{b}
+        \PY{n+nb}{print} \PY{p}{(}\PY{n}{a}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+109
+100
+900
+100.0
+1.0
+
+    \end{Verbatim}
+
+    \hypertarget{mathematical-functions}{%
+\subsubsection*{3.4.3 Mathematical
+functions}\label{mathematical-functions}}
+
+Basic mathematical functions are not available in basic Python, but need
+to be added in by importing the math module. There are several ways to
+achieve this, which each have slightly different effects:
+
+\includegraphics[width=0.6\maxwidth]{MathImport.png}
+
+
+Here is a brief list of some of the functions available. There are many
+more, which can be found in the
+\href{http://docs.python.org/3/library/math.html}{Python math module
+documentation.}
+
+\includegraphics[width=0.6\maxwidth]{MathModule.png}
+
+
+N.B. For trig functions, all arguments are in \emph{radians}. Examples:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k+kn}{import} \PY{n+nn}{math}
+        \PY{n}{x} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{pi} \PY{o}{/} \PY{l+m+mi}{4} \PY{c+c1}{\PYZsh{} math.pi = 3.14159...}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sin(pi/4) = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{math}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cos(pi/4) = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{math}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tan(pi/4) = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{math}\PY{o}{.}\PY{n}{tan}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+sin(pi/4) =  0.7071067811865475
+cos(pi/4) =  0.7071067811865476
+tan(pi/4) =  0.9999999999999999
+
+    \end{Verbatim}
+
+    \hypertarget{functions-of-complex-numbers}{%
+\subsubsection*{3.4.4 Functions of Complex
+Numbers}\label{functions-of-complex-numbers}}
+
+These follow the same pattern as the \texttt{math} functions described
+above. However, they are contained in a module called \texttt{cmath}
+(see the \href{https://docs.python.org/3/library/cmath.html}{Python
+cmath module documentation}) and therefore have a different prefix
+
+\includegraphics[width=0.6\maxwidth]{CmathModule.png}
+
+N.B. the built-in function \texttt{abs(z)} returns the modulus of the
+complex number \texttt{z}. There is no \texttt{cmath} equivalent. Here
+is an example:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{import} \PY{n+nn}{cmath}
+        
+        \PY{n}{z1} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{+} \PY{l+m+mi}{1}\PY{n}{j} \PY{c+c1}{\PYZsh{} remember j is root(\PYZhy{}1)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Modulus of z1: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{z1}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Argument of z1: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{cmath}\PY{o}{.}\PY{n}{phase}\PY{p}{(}\PY{n}{z1}\PY{p}{)}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ radians}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Square root of z1: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{cmath}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{z1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Modulus of z1:  1.4142135623730951
+Argument of z1:  0.7853981633974483  radians
+Square root of z1:  (1.09868411346781+0.45508986056222733j)
+
+    \end{Verbatim}
+
+    \hypertarget{random-numbers}{%
+\subsubsection*{3.4.5 Random numbers}\label{random-numbers}}
+
+These are available using a module called \texttt{random} (see the
+\href{https://docs.python.org/3/library/random.html}{Python random
+module documentation}).
+
+Random numbers are not really random, but follow a pseudo-random
+sequence generated by algorithm. Every pseudo-random sequence must be
+given an initial \texttt{seed} to start it off. It is common to use the
+system time (the time on the computer's internal clock) as the random
+number seed.
+
+The random module contains functions for generating random numbers from
+various different distributions. The simplest are \emph{rectangular}
+distributions of integers and floating point numbers. For example:
+
+\begin{verbatim}
+random.seed()       # initialises the random number seed
+random.randint(a,b) # random integer between (and including) a and b
+random.random()     # random floating point number between 0.0 and 1.0
+random.uniform(a,b) # random floating point number between a and b
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k+kn}{import} \PY{n+nn}{random}
+         
+         \PY{n}{i}\PY{o}{=}\PY{l+m+mi}{0}
+         \PY{n}{a}\PY{p}{,} \PY{n}{b} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{6}  \PY{c+c1}{\PYZsh{} shorthand for saying a = 1 and b = 6}
+         \PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k}{while} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{l+m+mi}{10}\PY{p}{:}  \PY{c+c1}{\PYZsh{} repeat this 10 times}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{,} \PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} generate integers between 1 and 6 and }
+                                                            \PY{c+c1}{\PYZsh{} floating point numbers between 0.0 and 1.0.}
+             \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0 6 0.06125092091096085
+1 4 0.22631085270438878
+2 2 0.5114406737224949
+3 2 0.9876184760435239
+4 4 0.44721065159783846
+5 3 0.019830887518815343
+6 5 0.6868974017619249
+7 6 0.7890057291805633
+8 2 0.33848547053182665
+9 6 0.8543192263297176
+
+    \end{Verbatim}
+
+    \hypertarget{bytes-bits-and-other-storage}{%
+\subsubsection*{3.4.6 Bytes, Bits and other
+storage}\label{bytes-bits-and-other-storage}}
+
+\begin{itemize}
+\tightlist
+\item
+  Bit = 1 or 0 , this is the most basic element of number storage
+\item
+  Byte = 8 bits, i.e, 00000000 to 11111111 in binary = 0..255 in decimal
+  or 0..FF in Hexadecimal
+\item
+  All numbers are stored and manipulated as bits in computers. Different
+  number types (e.g.~integers or floats) are stored differently: even if
+  they are the same number e.g.~1 and 1.0.
+\item
+  Small positive integers can be stored as a simple byte. However,
+  Python uses as many bytes as necessary to store each integer exactly.
+\item
+  Floating point numbers are typically stored in 8 bytes (64 bits) which
+  means precision is limited to around 15 decimal digits only. The 64
+  bits are divided as follows (IEEE 754 standard):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Sign: 1 bit (represents \texttt{+} or \texttt{-}).
+  \item
+    Exponent: 11 bits (allows numbers in range \(10^{-308}\) to
+    \(10^{308}\)).
+  \item
+    Mantissa (or fractional part of number): 52 bits (allows 15 digits
+    of precision, see section 3.2.3 above).
+  \end{itemize}
+\end{itemize}
+
+    \hypertarget{handling-strings-lists-tuples-and-more}{%
+\subsection{Handling strings, lists, tuples and
+more}\label{handling-strings-lists-tuples-and-more}}
+
+\hypertarget{strings}{%
+\subsubsection*{3.5.1 Strings}\label{strings}}
+
+\begin{itemize}
+\tightlist
+\item
+  Generally, a string is a collection of characters: e.g.
+  \texttt{“Hello”}.
+\item
+  They are usually stored in memory as their ASCII character codes:
+\end{itemize}
+
+\includegraphics[width=0.6\maxwidth]{standard-ascii-table-mod.jpg}
+
+\begin{itemize}
+\tightlist
+\item
+  So ``Hello'' is stored as: 72,101,108,108,111 in decimal.
+\item
+  In Python, each character will occupy one or more bytes of memory,
+  depending on the representation being used.
+\end{itemize}
+
+\hypertarget{assignment}{%
+\paragraph{Assignment:}\label{assignment}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{string1} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hello}\PY{l+s+s2}{\PYZdq{}} \PY{c+c1}{\PYZsh{} can use double quotes}
+        \PY{n}{string2} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{World}\PY{l+s+s1}{\PYZsq{}} \PY{c+c1}{\PYZsh{} or single quotes}
+        \PY{n}{string3} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}o\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{*}\PY{l+m+mi}{4}
+        \PY{n}{string4} \PY{o}{=} \PY{n}{string3} \PY{o}{+} \PY{n}{string1} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{string2} \PY{o}{+} \PY{n}{string3}
+        \PY{n}{empty} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}} \PY{c+c1}{\PYZsh{} an empty string of zero length}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{string4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+-o--o--o--o-Hello World-o--o--o--o-
+
+    \end{Verbatim}
+
+    \hypertarget{converting-numbers-to-strings}{%
+\paragraph{Converting numbers to
+strings:}\label{converting-numbers-to-strings}}
+
+\begin{itemize}
+\tightlist
+\item
+  Use the \texttt{str()} function. e.g.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{s1} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}
+        \PY{n}{s2} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{l+m+mf}{100.0}\PY{p}{)}
+        \PY{n}{s3} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{l+m+mf}{1e20}\PY{p}{)}
+        \PY{n}{s4} \PY{o}{=} \PY{n}{s1} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{s2} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{s3}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{s4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100 100.0 1e+20
+
+    \end{Verbatim}
+
+    \texttt{s4} now equals ``100 100.0 1e+20''
+
+    \hypertarget{special-escape-sequences-for-extra-format-control}{%
+\paragraph{Special ``escape'' sequences for extra format
+control}\label{special-escape-sequences-for-extra-format-control}}
+
+\begin{itemize}
+\item
+  To include a quotation mark in a string, use the opposite quotes to
+  define the string e.g.
+
+  \begin{itemize}
+  \item
+    s1 = ``Fred's World''
+  \item
+    s2 = `\,``Hello'', he said'
+  \end{itemize}
+\item
+  Other non-printing characters may be included by using the appropriate
+  ``escape'' sequence, usually indicated by a backslash,
+  \texttt{\textbackslash{}}. Here are some common ones:
+\end{itemize}
+
+\includegraphics[width=0.6\maxwidth]{Escape.png}
+
+For example:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{s1} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fred}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{World}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{s1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Fred's
+World
+
+    \end{Verbatim}
+
+    \hypertarget{slicing-and-dicing-strings}{%
+\paragraph{Slicing and dicing
+strings}\label{slicing-and-dicing-strings}}
+
+\begin{itemize}
+\tightlist
+\item
+  Can be useful for reading in data from files (more on this later).
+\item
+  Individual characters in a string can be indexed (referred to) using
+  square brackets, and counting from zero.
+\item
+  For example:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n}{s1} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Captain Marvel}\PY{l+s+s2}{\PYZdq{}} \PY{c+c1}{\PYZsh{} DC Comics.}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{s1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{s1}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,} \PY{n}{s1}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C a l
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Note how the negative index counts back from the far end of the
+  string.
+\item
+  A section of the string is obtained using \texttt{s1{[}i:j{]}}, which
+  will include the \texttt{i}th character but exclude the \texttt{j}th.
+  For example:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{s1}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{s1}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{7}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{s1}\PY{p}{[}\PY{l+m+mi}{7}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+tai
+Captain
+ Marvel
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Optionally, a third index may be used to specify the \texttt{step}
+  used:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{s1}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} gives every other character of the whole string}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+CpanMre
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  To find whether a string includes a particular sub-string use the
+  \texttt{in} operator:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Captain}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{s1}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sergeant}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{s1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+True
+False
+
+    \end{Verbatim}
+
+    \hypertarget{string-methods}{%
+\paragraph{String Methods}\label{string-methods}}
+
+\begin{itemize}
+\tightlist
+\item
+  Strings are \emph{immutable} which means they cannot be redefined once
+  created (although they can be completely replaced).
+\item
+  To find the length of a string (in characters) use the built-in
+  \texttt{len()} method:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Length of s1 is }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{s1}\PY{p}{)}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ characters.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Length of s1 is  14  characters.
+
+    \end{Verbatim}
+
+    \texttt{len()} also works with lists and other multi-element objects. 
+\begin{itemize}
+\item   
+There are many \emph{methods} available for operating on strings e.g.~we
+have already met the \texttt{format()} method when printing strings
+using \texttt{print()}. \item Here is a selection (see textbooks for more):
+\end{itemize}
+
+\includegraphics[width=0.6\maxwidth]{StringMethods.png}
+
+
+Other functions include \texttt{upper()}, \texttt{lower()} and
+\texttt{title()} for changing the case of the string and
+\texttt{replace(old,new)} for swapping occurences of \texttt{old} with
+\texttt{new} within a string.
+
+In addition, we have already met the following functions for converting
+strings to integers or floats:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{int(string)} converts a string to an integer
+\item
+  \texttt{float(string)} converts a string to a floating point numbers
+\item
+  Here are some examples. In each case, the original string is
+  unchanged:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{s2} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Guardians of the Galaxy}\PY{l+s+s2}{\PYZdq{}} \PY{c+c1}{\PYZsh{} Marvel Comics}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{s2}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Galaxy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+17
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{s3} \PY{o}{=} \PY{n}{s2}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{There are }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{s3}\PY{p}{)}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ substrings}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{  substring 1: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{s3}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{  substring 2: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{s3}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{  substring 3: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{s3}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{  substring 4: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{s3}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are  4  substrings
+  substring 1:  Guardians
+  substring 2:  of
+  substring 3:  the
+  substring 4:  Galaxy
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Example use of string methods}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} \PYZsq{}for\PYZsq{}, \PYZsq{}range\PYZsq{} and \PYZsq{}if, elif, else\PYZsq{} will be covered in later sections}
+         
+         \PY{n}{string1} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{10 Green Bottles}\PY{l+s+s2}{\PYZdq{}}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{string1}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{string1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{isalpha}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Character }\PY{l+s+si}{\PYZpc{}2d}\PY{l+s+s2}{ is }\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+s2}{ and is alphabetic}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{string1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{k}{elif} \PY{n}{string1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{isdigit}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Character }\PY{l+s+si}{\PYZpc{}2d}\PY{l+s+s2}{ is }\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+s2}{ and is numeric}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{string1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Character }\PY{l+s+si}{\PYZpc{}2d}\PY{l+s+s2}{ is }\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+s2}{ and is not alphanumeric}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{string1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Character  0 is "1" and is numeric
+Character  1 is "0" and is numeric
+Character  2 is " " and is not alphanumeric
+Character  3 is "G" and is alphabetic
+Character  4 is "r" and is alphabetic
+Character  5 is "e" and is alphabetic
+Character  6 is "e" and is alphabetic
+Character  7 is "n" and is alphabetic
+Character  8 is " " and is not alphanumeric
+Character  9 is "B" and is alphabetic
+Character 10 is "o" and is alphabetic
+Character 11 is "t" and is alphabetic
+Character 12 is "t" and is alphabetic
+Character 13 is "l" and is alphabetic
+Character 14 is "e" and is alphabetic
+Character 15 is "s" and is alphabetic
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c+c1}{\PYZsh{} Another string example}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{}Could be used when reading data from a file where numbers and text are mixed}
+         
+         \PY{n}{string1} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Width=34.5565}\PY{l+s+s2}{\PYZdq{}}  \PY{c+c1}{\PYZsh{} load values into string1}
+         
+         \PY{n}{numbit} \PY{o}{=} \PY{n}{string1}\PY{p}{[}\PY{n}{string1}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{=}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}  \PY{c+c1}{\PYZsh{} find the position of the = sign}
+                                                  \PY{c+c1}{\PYZsh{} then copy the substring into numbit}
+         \PY{n}{width} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{numbit}\PY{p}{)}  \PY{c+c1}{\PYZsh{} do the conversion, if numbit is not numeric then the conversion will fail}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The number was }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{width}\PY{p}{)}\PY{p}{)}  \PY{c+c1}{\PYZsh{} display the result of the conversion}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The number was 34.556500
+
+    \end{Verbatim}
+
+    \hypertarget{lists}{%
+\subsubsection*{3.5.2 Lists}\label{lists}}
+
+\begin{itemize}
+\tightlist
+\item
+  A \emph{list} is an ordered array of objects, separated by commas
+  within square brackets. For example:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{MyList} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{3.1415}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tuesday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{o}{+}\PY{l+m+mi}{1}\PY{n}{j}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{MyList}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1, 3.1415, 'Tuesday', (1+1j)]
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Elements in lists are referenced using square brackets, numbering from
+  zero:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{MyList}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{MyList}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1 (1+1j)
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Lists can contain other lists:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{MyNewList} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{3.162}\PY{p}{,} \PY{n}{MyList}\PY{p}{,} \PY{l+m+mf}{1.414}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{MyNewList}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[3.162, [1, 3.1415, 'Tuesday', (1+1j)], 1.414]
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Nested lists and strings can be accessed using repeated square
+  brackets. e.g.~for the 2nd item in \texttt{MyNewList{[}1{]}} use:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{MyNewList}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} 3.1415
+\end{Verbatim}
+            
+    \begin{itemize}
+\tightlist
+\item
+  and for the 4th letter of the 3rd item in MyNewList{[}1{]} use:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{MyNewList}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} 's'
+\end{Verbatim}
+            
+    We met lists previously, when handling strings. Recall:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{s2} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Guardians Of The Galaxy}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{s3} \PY{o}{=} \PY{n}{s2}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} s3 is a list of strings (words)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{s3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Guardians', 'Of', 'The', 'Galaxy']
+
+    \end{Verbatim}
+
+    Lists are \emph{mutable} which means they can be changed, lengthened and
+shortened after creation (unlike strings which are immutable). For
+example:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{s3}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Stars}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{s3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Stars', 'Of', 'The', 'Galaxy']
+
+    \end{Verbatim}
+
+    Here are some examples of \texttt{list} methods (see textbooks for other
+examples):
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{s3}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{local}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} insert a new element at a specified location}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{s3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Stars', 'Of', 'The', 'local', 'Galaxy']
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{s3}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Masters}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} add an element to the end of the list}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{s3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Stars', 'Of', 'The', 'local', 'Galaxy', 'Masters']
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{s3}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Stars}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} remove the first occurrence of a particular element}
+         \PY{n}{s3}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{local}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} remove the first occurrence of a particular element}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{s3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Of', 'The', 'Galaxy', 'Masters']
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{s3}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Universe}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{s3}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} sort in the list in place (this is alphabetical...)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{s3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Masters', 'Of', 'The', 'Universe']
+
+    \end{Verbatim}
+
+    Lists of numbers can be useful for storing data, for example, for
+graphs. However, in general lists are quite inefficient both in their
+use of memory and the time taken to access individual elements. For
+serious numerical work, therefore, it is recommended that you use NumPy
+arrays instead of lists (see later, section 5.1).
+
+    \hypertarget{tuples-sets-and-dictionaries}{%
+\subsubsection*{3.5.3 Tuples, sets and
+dictionaries}\label{tuples-sets-and-dictionaries}}
+
+\hypertarget{tuples}{%
+\paragraph{Tuples}\label{tuples}}
+
+A \texttt{tuple} is similar to a list but cannot be altered after
+creation i.e.~it is immutable. Tuples are indicated through the use of
+round brackets in their definitions, and may be indexed in the same way
+as strings and lists (using square brackets). For example:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{My\PYZus{}Tuple} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{1.23}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{five}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{My\PYZus{}Tuple}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{My\PYZus{}Tuple}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{My\PYZus{}Tuple}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(1.23, 4, 'five', [6, 7, 8]) 
+ five 
+ [6, 7, 8]
+
+    \end{Verbatim}
+
+    We will come across occasional uses for tuples. One example is in
+initialising variables: 
+\begin{verbatim}
+    x, y, z = 1.0, 2.0, 3.0
+\end{verbatim}
+
+makes the assignment x=1.0, y=2.0, z=3.0, while: 
+
+\begin{verbatim}
+    u, v = v, u
+\end{verbatim}
+
+swaps the values of the variables u and v.
+
+\hypertarget{dictionaries-and-sets}{%
+\paragraph{Dictionaries and Sets}\label{dictionaries-and-sets}}
+
+\begin{itemize}
+\tightlist
+\item
+  A \texttt{Dictionary} is an object that consists of associated
+  \emph{key-value} pairs. For example:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{densitySI} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{water}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mf}{1000.0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gold}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mf}{19320.0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mercury}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mf}{13546.0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{air}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mf}{1.2}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{helium}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mf}{0.179}\PY{p}{\PYZcb{}}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The density of water is:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{densitySI}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{water}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kg/m3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The density of gold is:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{densitySI}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gold}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kg/m3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The density of water is: 1000.0 kg/m3
+The density of gold is: 19320.0 kg/m3
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\item
+  Note the use of curly brackets in the definition of
+  \texttt{densitySI}.
+\item
+  A \texttt{set} is a \emph{mutable} object that consists of an
+  unordered collection of unique items. For example the set defined by
+  \texttt{\{1,\ 2,\ 3,\ 3,\ 2,\ 3,\ 4,\ 5,\ 4,\ 2,\ 1\}} contains 5
+  unique entries:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{MySet} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{\PYZcb{}}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{MySet}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{1, 2, 3, 4, 5\}
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\item
+  Note the use of curly brackets in the definition of
+  \texttt{densitySI}.
+\item
+  Dictionaries and Sets are covered in more detail in the recommended
+  textbooks and will only be of limited use in the Computational Physics
+  assignments.
+\end{itemize}
+
+    \hypertarget{program-control-1-loops}{%
+\subsection{Program Control 1:
+Loops}\label{program-control-1-loops}}
+
+The big advantage of computer programs over manual calculation is the
+ability to repeat operations many times, very quickly. To achieve this,
+some sort of a program loop is required. There are two types of loop
+structure in common use in Python: the \texttt{for} loop and the
+\texttt{while} loop. Both will be explained below. 
+
+\subsubsection*{3.6.1 ``for''
+loops} The \texttt{for} loop requires the idea of an \texttt{iterable}
+object, so we begin with that. An iterable object is essentially an
+object that contains many elements which may be cycled through in
+sequence. \texttt{tuples} and \texttt{lists} are examples of iterable
+objects. The basic structure is as follows:
+
+\begin{verbatim}
+for *item* in *iterable_object*:
+    # do some stuff
+  
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{*item*} is an element from the iterable object, taken in
+  sequence.
+\item
+  \texttt{*iterable\_object*} could be a list of numbers,
+  \texttt{{[}1,\ 2,\ 3,\ 4,\ 5{]}}, or other items,
+  \texttt{{[}\textquotesingle{}England\textquotesingle{},\ \textquotesingle{}Northern\ Ireland\textquotesingle{},\ \textquotesingle{}Scotland\textquotesingle{},\ \textquotesingle{}Wales\textquotesingle{}{]}}.
+\item
+  The colon \texttt{":"} indicates the start of the loop.
+\item
+  All the lines to be executed within the loop must be indented, and by
+  an identical amount (e.g.~one tab, 4 spaces etc). Tabs and spaces
+  cannot be mixed. The end of the loop will be the end of the indented
+  section.
+\item
+  Incorrect use of indents can be a cause of great anguish to the novice
+  Python programmer.
+\end{itemize}
+
+Here are some examples.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k}{for} \PY{n}{Country} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{England}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Northern Ireland}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scotland}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{Country}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+England
+Northern Ireland
+Scotland
+Wales
+
+    \end{Verbatim}
+
+    In the above, a variable called \texttt{Country} is created and
+assigned, in turn, to each of the names in the list.
+
+In the following example, the variable \texttt{i} is set to each of the
+list of integers shown:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{i}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i\PYZca{}2:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{i}\PY{o}{*}\PY{n}{i}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i\PYZca{}3:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{i}\PY{o}{*}\PY{n}{i}\PY{o}{*}\PY{n}{i}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{End of loop}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+i: 1 i\^{}2: 1 i\^{}3: 1
+i: 3 i\^{}2: 9 i\^{}3: 27
+i: 2 i\^{}2: 4 i\^{}3: 8
+i: 6 i\^{}2: 36 i\^{}3: 216
+i: 5 i\^{}2: 25 i\^{}3: 125
+End of loop
+
+    \end{Verbatim}
+
+    Note, in the following, the use of the iterable \texttt{range()} object.
+\texttt{range()} has three forms, as indicated. \texttt{range(n)}
+produces a set of integers from \texttt{0} to \texttt{n-1}:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0
+1
+2
+3
+4
+
+    \end{Verbatim}
+
+    \texttt{range(m,n)} produces integers from \texttt{m} to \texttt{n-1}:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2
+3
+4
+5
+6
+
+    \end{Verbatim}
+
+    and \texttt{range(m,n,s)} produces integers from \texttt{m} in steps of
+\texttt{s}, ending one value before \texttt{n}:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+10
+8
+6
+4
+2
+
+    \end{Verbatim}
+
+    \hypertarget{while-loops}{%
+\subsubsection*{3.6.2 ``while'' loops}\label{while-loops}}
+
+We have already met the \texttt{while} loop. The basic structure is:
+
+\begin{verbatim}
+while *condition_is_true*:
+    # do some stuff
+\end{verbatim}
+
+As with the \texttt{for} loop, the \texttt{while} loop will repeat only
+the indented part of the code. All indents must be an identical number
+of tabs or spaces. For example:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n}{i}\PY{o}{=}\PY{l+m+mi}{0}  \PY{c+c1}{\PYZsh{} Initialise the variable}
+        \PY{k}{while} \PY{p}{(}\PY{n}{i}\PY{o}{\PYZlt{}}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{i}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i\PYZca{}2=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{i}\PY{o}{*}\PY{n}{i}\PY{p}{)}
+            \PY{n}{i}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{2} \PY{c+c1}{\PYZsh{} increment the variable}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+i= 0 i\^{}2= 0
+i= 2 i\^{}2= 4
+i= 4 i\^{}2= 16
+i= 6 i\^{}2= 36
+i= 8 i\^{}2= 64
+
+    \end{Verbatim}
+
+    Another example: a very poor method of numerical integration. This short
+program will perform the integral:
+$$\int_0^{\infty}\frac{\sin(x)}{\exp(x)+4}\mathrm{d}x$$ where infinity
+is approximated by 10.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} A method to integrate a function by summing lots of rectangles}
+         \PY{c+c1}{\PYZsh{}}
+         
+         \PY{k+kn}{import} \PY{n+nn}{math}
+         
+         \PY{n}{xmin} \PY{o}{=} \PY{l+m+mf}{0.0}        \PY{c+c1}{\PYZsh{} minimum x value for integral}
+         \PY{n}{xinfinity} \PY{o}{=} \PY{l+m+mf}{10.0}  \PY{c+c1}{\PYZsh{} maximum x value for integral}
+         \PY{n}{numsteps} \PY{o}{=} \PY{l+m+mi}{10000}  \PY{c+c1}{\PYZsh{} number of rectangles to approximate integral}
+         \PY{n}{xstep} \PY{o}{=} \PY{n}{xinfinity} \PY{o}{/} \PY{n}{numsteps}  \PY{c+c1}{\PYZsh{} width of a rectangle, i.e. dx}
+         \PY{n}{x} \PY{o}{=} \PY{n}{xmin}          \PY{c+c1}{\PYZsh{} current x value}
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}             \PY{c+c1}{\PYZsh{} loop counter}
+         \PY{n+nb}{sum} \PY{o}{=} \PY{l+m+mf}{0.0}         \PY{c+c1}{\PYZsh{} the current value of the integral}
+             
+         \PY{k}{while} \PY{p}{(}\PY{n}{x}\PY{o}{\PYZlt{}}\PY{n}{xinfinity}\PY{p}{)}\PY{p}{:}
+             \PY{n}{x} \PY{o}{=} \PY{n}{xmin} \PY{o}{+} \PY{n}{i}\PY{o}{*}\PY{n}{xstep}
+             \PY{n+nb}{sum} \PY{o}{+}\PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{4}\PY{p}{)}\PY{o}{*}\PY{n}{xstep}
+             \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Value of integral is:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n+nb}{sum}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Value of integral is: 0.2090887803611044
+
+    \end{Verbatim}
+
+    For information, the function appears as follows. We will cover plotting
+later on. 
+
+\includegraphics[width=0.6\maxwidth]{graph2.jpg}
+
+    \hypertarget{nested-loops}{%
+\subsubsection*{3.6.3 Nested loops}\label{nested-loops}}
+
+Loops can be nested, by using multiple indentation. For example, the
+following short program prints products: \(i\times j\) where
+\(i=1\ldots3\) and \(j=1\ldots3\):
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{while} \PY{p}{(}\PY{n}{i}\PY{o}{\PYZlt{}}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+             \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+             \PY{n}{j} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{while} \PY{p}{(}\PY{n}{j}\PY{o}{\PYZlt{}}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{j} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{i}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{j}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{i}\PY{o}{*}\PY{n}{j}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}    
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+-------------
+| 1 x 1 = 1 |
+| 1 x 2 = 2 |
+| 1 x 3 = 3 |
+-------------
+| 2 x 1 = 2 |
+| 2 x 2 = 4 |
+| 2 x 3 = 6 |
+-------------
+| 3 x 1 = 3 |
+| 3 x 2 = 6 |
+| 3 x 3 = 9 |
+-------------
+
+    \end{Verbatim}
+
+    \hypertarget{breaking-out-of-a-loop}{%
+\subsubsection*{3.6.4 Breaking out of a
+loop}\label{breaking-out-of-a-loop}}
+
+\begin{itemize}
+\tightlist
+\item
+  You can break out of a loop using the \texttt{break} statement. Here
+  is the previous example with a break when the product gets too big:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{while} \PY{p}{(}\PY{n}{i}\PY{o}{\PYZlt{}}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+             \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+             \PY{n}{j} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{while} \PY{p}{(}\PY{n}{j}\PY{o}{\PYZlt{}}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{j} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                 \PY{k}{if} \PY{n}{i}\PY{o}{*}\PY{n}{j} \PY{o}{\PYZgt{}} \PY{l+m+mi}{4}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{| Too big!! |}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                     \PY{k}{break}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{i}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{j}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{i}\PY{o}{*}\PY{n}{j}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{|}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}    
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+-------------
+| 1 x 1 = 1 |
+| 1 x 2 = 2 |
+| 1 x 3 = 3 |
+-------------
+| 2 x 1 = 2 |
+| 2 x 2 = 4 |
+| Too big!! |
+-------------
+| 3 x 1 = 3 |
+| Too big!! |
+-------------
+
+    \end{Verbatim}
+
+    \hypertarget{program-control-2-decision-making-and-branching}{%
+\subsection{Program Control 2: Decision Making and
+Branching}\label{program-control-2-decision-making-and-branching}}
+
+The other control structure essential to any programming language is the
+conditional statement, which allows decisions to be made based on the
+values of variables. Conditional statements are usually referred to as
+\texttt{if} statements. 
+\subsubsection*{3.7.1 The \texttt{if} statement}
+\begin{itemize}
+\item  Program
+branching is controlled using conditional statements. \item These are also
+known as \texttt{if} statements. \item The basic structure is:
+
+\end{itemize}
+
+\begin{verbatim}
+    if ... elif ... else
+\end{verbatim}
+
+i.e.:
+
+\begin{verbatim}
+    if *expression_is_true*:
+        {do this}
+    elif *other_expression_is_true*: 
+        {do that}
+    else:
+        {do the other}
+    
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Note the use of indentation again to control which lines are executed.
+\item
+  Example:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{p}{(}\PY{n}{i} \PY{o}{\PYZlt{}} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{is less than 3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{elif} \PY{p}{(}\PY{n}{i} \PY{o}{\PYZgt{}} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{is greater than 6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{is in the middle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0 is less than 3
+1 is less than 3
+2 is less than 3
+3 is in the middle
+4 is in the middle
+5 is in the middle
+6 is in the middle
+7 is greater than 6
+8 is greater than 6
+9 is greater than 6
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Complex \texttt{if} statements may be built up using the following
+  operators
+\end{itemize}
+
+\includegraphics[width=0.4\maxwidth]{ifoperator.png}
+
+    \begin{itemize}
+\tightlist
+\item
+  Examples:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{if\ (j==3)\ or\ (j==5):} True if j = 3 or 5 (note double ==
+    signs)
+  \item
+    \texttt{if\ j\textgreater{}3\ and\ j\textless{}6:} True if j
+    \textgreater{} 3 but less than 6
+  \item
+    \texttt{if\ j\ !=\ 3:} True if j not equal to 3
+  \item
+    \texttt{if\ ((j\textgreater{}3)and(j!=6))\ or\ (j==1):} True if j is
+    greater than 3 and not equal to 6, OR if j equals 1
+  \end{itemize}
+\end{itemize}
+
+    \hypertarget{equality-tests-on-floats}{%
+\subsubsection*{3.7.2 Equality tests on
+floats}\label{equality-tests-on-floats}}
+
+\begin{itemize}
+\tightlist
+\item
+  Consider the following:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{MyInput} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Enter the square of 0.1: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{MyNumber} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{MyInput}\PY{p}{)}
+         
+         \PY{k}{if} \PY{n}{MyNumber} \PY{o}{==} \PY{l+m+mf}{0.1}\PY{o}{*}\PY{l+m+mf}{0.1}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{You were correct}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{else}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{MyNumber}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{is not the square of 0.1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Enter the square of 0.1: 0.01
+0.01 is not the square of 0.1
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  You might think that if you enter 0.01 at the prompt then the
+  \texttt{if} statement would be true.
+\item
+  However, it depends on the version of Python and the system precision.
+\item
+  On my system, 0.1*0.1 = 0.010000000000000002; hence the test fails.
+\item
+  So, it is best to \textbf{always avoid equality tests on floating
+  point numbers}; instead use something like this:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{k+kn}{import} \PY{n+nn}{sys}
+         \PY{n}{MyInput} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Enter the square of 0.1: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{MyNumber} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{MyInput}\PY{p}{)}
+         
+         \PY{k}{if} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{MyNumber} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.1}\PY{o}{*}\PY{l+m+mf}{0.1}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{sys}\PY{o}{.}\PY{n}{float\PYZus{}info}\PY{o}{.}\PY{n}{epsilon}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{You were correct}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{else}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{MyNumber}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{is not the square of 0.1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Enter the square of 0.1: 5
+5.0 is not the square of 0.1
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  The function \texttt{abs()} takes the absolute value (without sign) of
+  a number.
+\item
+  sys.float\_info.epsilon is the smallest fractional difference between
+  two floats that can be distinguished. It is usually around
+  \(10^{-15}\) depending on your computer.
+\item
+  Instead of \texttt{sys.float\_info.epsilon} you can use a larger
+  \emph{tolerance} of your own, depending on your application.
+\end{itemize}
+
+    \hypertarget{functions}{%
+\subsection{Functions}\label{functions}}
+
+\begin{itemize}
+\tightlist
+\item
+  Functions provide a useful way of reducing the amount of code you need
+  to create, by allowing re-use of certain key parts.
+\item
+  Functions should always be defined at the top of your script,
+  \textbf{before} the main part of the program. This way you can keep
+  them separate and simplify the overall structure of your program.\end{itemize}
+
+\subsubsection*{3.8.1 Basic Functions}
+\begin{itemize}
+\tightlist
+\item
+  Use \textbf{functions} to simplify code structure and also to maximise
+  reuse of code.
+\item
+  Example:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{k}{def} \PY{n+nf}{volume} \PY{p}{(}\PY{n}{height}\PY{p}{,} \PY{n}{width}\PY{p}{,} \PY{n}{length} \PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    This is called a function definition.  You should place it before the }
+         \PY{l+s+sd}{    main program. This block of text is intended to describe the }
+         \PY{l+s+sd}{    operation of the function, and will be accessed using the }
+         \PY{l+s+sd}{    \PYZsq{}help(volume)\PYZsq{} command.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}      
+             \PY{k}{return} \PY{n}{height}\PY{o}{*}\PY{n}{width}\PY{o}{*}\PY{n}{length}
+         
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} Here is the main program}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{dim1} \PY{o}{=} \PY{l+m+mf}{23.5}
+         \PY{n}{dim2} \PY{o}{=} \PY{l+m+mf}{789.232}
+         \PY{n}{dim3} \PY{o}{=} \PY{l+m+mf}{1.099}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The volume is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{volume}\PY{p}{(}\PY{n}{dim1}\PY{p}{,}\PY{n}{dim2}\PY{p}{,}\PY{n}{dim3}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} Print the \PYZsq{}help\PYZsq{} text...}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{help}\PY{p}{(}\PY{n}{volume}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The volume is 20383.100247999995
+Help on function volume in module \_\_main\_\_:
+
+volume(height, width, length)
+    This is called a function definition.  You should place it before the 
+    main program. This block of text is intended to describe the 
+    operation of the function, and will be accessed using the 
+    'help(volume)' command.
+
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Note the following features of the function definition:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Function declaration using the \texttt{def} command. Give your
+    functions memorable names so it is obvious what they do.
+  \item
+    Argument list: within the function, the arguments have names that
+    are local to the function \textbf{i.e.~they are not known outside
+    the function}. This can be both useful and confusing. It is useful
+    because it means you can re-use variable names within more than one
+    function without them interfering with each other, but it is also
+    confusing for much the same reason.
+  \item
+    However, variables from the main program \textbf{are} available
+    within the function, which can be very confusing. Therefore it is
+    best practice to pass in \textbf{all} the required variables through
+    the argument list, and avoid re-use of variables names.
+  \item
+    The \emph{body} of the function is indicated by indentation, as with
+    loops and conditional statements.
+  \item
+    The \texttt{return} statement is used to return the \textbf{result}
+    of performing the function. In the present case that would be the
+    \emph{volume}.
+  \end{itemize}
+\end{itemize}
+
+    \hypertarget{function-return-values}{%
+\subsubsection*{\texorpdfstring{3.8.2 Function \texttt{return}
+values}{3.8.2 Function return values}}\label{function-return-values}}
+
+\begin{itemize}
+\tightlist
+\item
+  Generally speaking, every function should return a value through the
+  \texttt{return} statement.
+\item
+  Sometimes you want to return several values e.g.~the components of a
+  vector. This is readily achieved, as you can pass back any object,
+  including \texttt{tuples} and \texttt{lists}.
+\item
+  If you don't want the function to return anything, Python will return
+  an object called \texttt{None}.
+\item
+  Consider the following examples:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{printdoublex}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    This rather un\PYZhy{}intelligent function prints 2 times its argument}
+        \PY{l+s+sd}{    and returns nothing.}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{x}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}}
+        \PY{c+c1}{\PYZsh{} Main program}
+        \PY{c+c1}{\PYZsh{}}
+        \PY{n}{height} \PY{o}{=} \PY{l+m+mf}{3.54}
+        \PY{n}{width} \PY{o}{=} \PY{l+m+mf}{7.42}
+        \PY{n}{length} \PY{o}{=} \PY{l+m+mf}{1.0e3}
+        \PY{n}{printdoublex}\PY{p}{(}\PY{n}{height}\PY{p}{)}
+        \PY{n}{printdoublex}\PY{p}{(}\PY{n}{length}\PY{p}{)}
+        \PY{n}{printdoublex}\PY{p}{(}\PY{n}{width}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+7.08
+2000.0
+14.84
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k}{def} \PY{n+nf}{vector\PYZus{}add} \PY{p}{(}\PY{n}{vector1}\PY{p}{,} \PY{n}{vector2}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    This function performs vector addition. The arguments, vector1 and }
+         \PY{l+s+sd}{    vector2, should be list objects of length 3, and the value returned }
+         \PY{l+s+sd}{    will be a similar list object of the same length.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{vector3} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{]} \PY{o}{*} \PY{l+m+mi}{3}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{vector3}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{vector1}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{n}{vector2}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                 
+             \PY{k}{return} \PY{n}{vector3}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} Main program}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{a} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{b} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{c} \PY{o}{=} \PY{n}{vector\PYZus{}add} \PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The vector sum of}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{a}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{and}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{b}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{is:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{c}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The vector sum of (0, 0, 0) and (1, 2, 3) is: [1, 2, 3]
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Note that the inputs in this case were \texttt{tuples} while the
+  output was a \texttt{list}.
+\item
+  The code also works if the arguments are \texttt{lists}.
+\item
+  Note the need to initialise \texttt{vector3} before assigning values
+  to it.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}138}]:} \PY{k}{def} \PY{n+nf}{vector\PYZus{}add2} \PY{p}{(}\PY{n}{vector1}\PY{p}{,} \PY{n}{vector2}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{    This function performs vector addition. The arguments, vector1 and }
+          \PY{l+s+sd}{    vector2, should be list objects of the same length, and the value }
+          \PY{l+s+sd}{    returned will be a similar list object of the same length.}
+          \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+              \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{vector1}\PY{p}{)}
+              
+              \PY{k}{if} \PY{n}{n} \PY{o}{!=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{vector2}\PY{p}{)}\PY{p}{:}
+                  \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Error: input vectors have different lengths}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                  \PY{k}{return}
+              
+              \PY{n}{vector3} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{]} \PY{o}{*} \PY{n}{n}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{vector3}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{vector1}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{n}{vector2}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                  
+              \PY{k}{return} \PY{n}{vector3}
+          \PY{c+c1}{\PYZsh{}}
+          \PY{c+c1}{\PYZsh{} Main program}
+          \PY{c+c1}{\PYZsh{}}
+          \PY{n}{a} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{b} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{c} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{)}
+          \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The vector sum of}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{a}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{and}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{b}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{is:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{vector\PYZus{}add2}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The vector sum of}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{b}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{and}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{c}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{is:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{vector\PYZus{}add2}\PY{p}{(}\PY{n}{b}\PY{p}{,}\PY{n}{c}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The vector sum of (0, 0, 0, 0) and (1, 2, 3, 4) is: [1, 2, 3, 4]
+Error: input vectors have different lengths
+The vector sum of (1, 2, 3, 4) and (5, 6, 7) is: None
+
+    \end{Verbatim}
+
+    \hypertarget{key-value-pairs-in-function-argument-lists}{%
+\subsubsection*{3.8.3 key-value pairs in function argument
+lists}\label{key-value-pairs-in-function-argument-lists}}
+
+\begin{itemize}
+\tightlist
+\item
+  The arguments to a function must be specified in one of two ways:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    in the same order as the function definition
+  \item
+    in a different order but paired with a keyword
+  \end{enumerate}
+\item
+  The keyword is just the name of the argument in the function
+  definition.
+\item
+  This example also demonstrates the use of \emph{default} argument
+  values:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}141}]:} \PY{k}{def} \PY{n+nf}{pythagoras} \PY{p}{(}\PY{n}{a}\PY{o}{=}\PY{l+m+mf}{3.0}\PY{p}{,} \PY{n}{b}\PY{o}{=}\PY{l+m+mf}{4.0}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{    Demonstration of the use of key\PYZhy{}value pairs in function argument lists.}
+          \PY{l+s+sd}{    This function also has default values set, so that some arguments may be }
+          \PY{l+s+sd}{    omitted.}
+          \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+              \PY{k}{return} \PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{a}\PY{o}{*}\PY{n}{a} \PY{o}{+} \PY{n}{b}\PY{o}{*}\PY{n}{b}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}}
+          \PY{c+c1}{\PYZsh{} Main program}
+          \PY{c+c1}{\PYZsh{}}
+          \PY{n+nb}{print} \PY{p}{(}\PY{n}{pythagoras}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print} \PY{p}{(}\PY{n}{pythagoras}\PY{p}{(}\PY{n}{b}\PY{o}{=}\PY{l+m+mf}{5.0}\PY{p}{,} \PY{n}{a}\PY{o}{=}\PY{l+m+mf}{12.0}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print} \PY{p}{(}\PY{n}{pythagoras}\PY{p}{(}\PY{n}{b}\PY{o}{=}\PY{l+m+mf}{3.0}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+5.0
+13.0
+4.242640687119285
+
+    \end{Verbatim}
+
+    \hypertarget{help-my-code-does-not-work}{%
+\subsection{HELP my code does not
+work}\label{help-my-code-does-not-work}}
+
+\hypertarget{debugging}{%
+\subsubsection*{3.9.1 Debugging}\label{debugging}}
+
+\begin{itemize}
+\tightlist
+\item
+  Use the debugger built into Spyder (or whichever IDE / platform you
+  are using):
+\end{itemize}
+
+\includegraphics[width=0.6\maxwidth]{debug1.png}
+\begin{itemize}
+\item  With this you can: \begin{itemize}
+\item  step through your code line by line checking the
+contents of the variables, step by step; \item step into or out of
+functions; \item set breakpoints to cause the program to halt execution at
+particular places; \item examine the values of variables and watch them
+change as the program executes.
+
+\end{itemize}
+
+\end{itemize}
+
+\hypertarget{initialising-variables}{%
+\subsubsection*{3.9.2 Initialising
+variables}\label{initialising-variables}}
+
+\begin{itemize}
+\tightlist
+\item
+  Note that variables initially contain random values.
+\item
+  Usually this is not a problem, because you cannot use a variable until
+  it has been defined. e.g.~try the following code:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}74}]:} \PY{n}{x}\PY{o}{=}\PY{n}{BrandNewVariable}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        NameError                                 Traceback (most recent call last)
+
+        <ipython-input-74-cb8dc3a8a9cf> in <module>()
+    ----> 1 x=BrandNewVariable
+          2 print(x)
+
+
+        NameError: name 'BrandNewVariable' is not defined
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  The error message above indicates that \texttt{BrandNewVariable} has
+  not been seen before, and so cannot be used.\\
+\item
+  To avoid the problem, always assign values to variables before you use
+  them.
+\item
+  As noted above, \texttt{list} objects can be both created and
+  initialised using the following shorthand:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{n}{MyNewList} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{]} \PY{o}{*} \PY{l+m+mi}{5}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{MyNewList}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0.0, 0.0, 0.0, 0.0, 0.0]
+
+    \end{Verbatim}
+
+    \hypertarget{simple-exercises}{%
+\section{Simple Exercises}\label{simple-exercises}}
+Here are some optional exercises for you to practise what you have
+learnt so far.
+
+\hypertarget{exercise-1-short-exercises}{%
+\subsection*{Exercise 1: Short
+Exercises}\label{exercise-1-short-exercises}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  (Very basic) Write a programme that defines two integer variables,
+  assigns values to them, adds them up and puts the result in a third
+  integer variable, then prints the result to the screen. Now extend the
+  programme to do the same thing with an vector (list object) which has
+  three elements.
+\item
+  Read in two integer numbers from the keyboard (using the
+  \texttt{input()} function), divide the two and then display the whole
+  part of the result and the remainder as well as the complete floating
+  point division with 5 decimal places.
+\item
+  Write a loop to display all the odd integers up to 100. Calculate and
+  display their sum.
+\end{enumerate}
+
+\hypertarget{exercise-2-equation-solving}{%
+\subsection*{Exercise 2: Equation
+solving}\label{exercise-2-equation-solving}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+%\setcounter{enumi}{3}
+\tightlist
+\item
+  Solve the equation \(\cos(x) -x^3 =0\) using Newton's method:
+\end{enumerate}
+
+\includegraphics[width=0.6\maxwidth]{graph1.jpg}
+
+    \textbf{Note:} Here we are solving \(f(x)=0\), with
+\(f(x) = cos(x) -x^3\). The method works by first guessing a solution
+(say in the range 0 to 1). Call this \(x_0\). Then we proceed
+iteratively to the solution. The next approximation to the solution is
+given by:
+
+\(x_{n+1}=x_n - f(x_n)/\left[\mathrm{d}f(x_n)/\mathrm{d}x\right]\)
+
+Display the result of each iteration to the screen, like:
+
+\begin{verbatim}
+Iteration 1, x=1.385786648723 
+Iteration 2, x=1.018458571221 
+Iteration 3, x=0.884288635194 etc...
+\end{verbatim}
+
+Find the answer to 12 decimal places. The code should test when the
+answer has converged. To do this, before each iteration store the
+present solution in a variable (for example call it \texttt{xold}) then
+compare this to the new value of \(x\) after the iteration. Then test
+if:
+
+\begin{verbatim}
+abs(x-xold) < 1.0e-12
+\end{verbatim}
+
+    \hypertarget{more-advanced-python}{%
+\section{More Advanced Python}\label{more-advanced-python}}
+
+In this section we will cover: \begin{itemize}
+\item Arrays and the NumPy module \item
+Vectorisation \item Writing to and from files \item Graph plotting
+\end{itemize}
+
+
+\hypertarget{arrays-and-the-numpy-module}{%
+\subsection{Arrays and the NumPy
+module}\label{arrays-and-the-numpy-module}}
+
+\hypertarget{arrays-using-list-objects}{%
+\subsubsection*{\texorpdfstring{5.1.1 Arrays using \texttt{list}
+objects}{5.1.1 Arrays using list objects}}\label{arrays-using-list-objects}}
+
+\begin{itemize}
+\tightlist
+\item
+  Often, in writing programs with Physics applications in mind, the idea
+  of an \textbf{array} is useful.
+\item
+  An \textbf{array} is a list of numbers that can be referred to by an
+  \emph{index}.
+\item
+  The \texttt{list} object provides one way of creating an array.
+\item
+  Arrays can be used to store experimental data points for analysis, for
+  storing values of function evaluated at a set of points, or for a
+  range of other things.
+\item
+  Arrays are generally very useful.
+\item
+  For example, the following program lists a set of experimental data
+  points:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} Arrays : single dimension}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} A five element list array will have indices from 0 to 4}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{data} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{]} \PY{o}{*} \PY{l+m+mi}{5}
+         
+         \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{3.1}
+         \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{12.2}
+         \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{74.4}
+         \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{67.33}
+         \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{343.2}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Element number 3 = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n+nb}{sum} \PY{o}{=} \PY{l+m+mf}{0.0}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{All the elements:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Element }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ }\PY{l+s+si}{\PYZpc{}6.2f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{sum} \PY{o}{+}\PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+             
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{The average data value is }\PY{l+s+si}{\PYZpc{}6.2f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n+nb}{sum}\PY{o}{/}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Element number 3 =  67.33
+
+All the elements:
+
+Element 0   3.10
+Element 1  12.20
+Element 2  74.40
+Element 3  67.33
+Element 4 343.20
+
+The average data value is 100.05
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  What happens if we try to use array element \texttt{data{[}5{]}} which
+  is not defined?
+\end{itemize}
+
+\hypertarget{multi-dimensional-arrays-using-lists}{%
+\subsubsection*{5.1.2 Multi-dimensional arrays using
+lists}\label{multi-dimensional-arrays-using-lists}}
+
+\begin{itemize}
+\tightlist
+\item
+  Multi-dimensional arrays are possible, though rather cumbersome to set
+  up.
+\item
+  Here is an example using two dimensions:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}87}]:} \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} Arrays : multiple dimension}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} Declare an array of zeros with 5 rows and 2 columns.}
+         \PY{c+c1}{\PYZsh{} Start with a null list and \PYZsq{}append\PYZsq{} each row:}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{myarray} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+             \PY{n}{myarray}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{]}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} assign new values to all array elements}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{myarray}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{i}\PY{o}{*}\PY{n}{j}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Array element 3,1 is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{myarray}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Array row 3 is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{myarray}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The whole array is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{myarray}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Array element 3,1 is 3
+Array row 3 is [0, 3]
+The whole array is [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4]]
+
+    \end{Verbatim}
+
+    \hypertarget{better-arrays-using-numpy}{%
+\subsubsection*{5.1.3 Better arrays, using
+NumPy}\label{better-arrays-using-numpy}}
+
+\begin{itemize}
+\tightlist
+\item
+  NumPy is a module with \textbf{lots} of useful functions for
+  scientific work, including:
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Array handling
+\item
+  File reading / writing
+\item
+  Faster mathematical functions (than the built-in functions)
+\item
+  Statistics
+\item
+  Linear algebra
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  We will use it mainly for the first and third applications in the list
+  i.e.~as a convenient way of creating arrays, and for it's range of
+  fast mathematical functions.
+\item
+  Apart from ease of creation, NumPy arrays have two other big
+  advantages: they are \textbf{fast} and they are \textbf{vectorisable}.
+  The consequences of this will become clear later on.
+\end{itemize}
+
+\hypertarget{creating-arrays-with-numpy}{%
+\subsubsection*{5.1.4 Creating arrays with
+NumPy}\label{creating-arrays-with-numpy}}
+
+\begin{itemize}
+\tightlist
+\item
+  NumPy arrays can be regarded as a multidimensional table of values
+  indexed by a tuple of integers.
+\item
+  All elements in a NumPy array must be of the same type (unlike Python
+  lists).
+\item
+  This, however, is entirely appropriate for scientific work.
+\item
+  A NumPy array is physically stored as a contiguous block of memory,
+  which makes it very efficient for passing between functions and for
+  performing general algebraic manipulations on it.
+\item
+  It is generally a good idea to import NumPy as \texttt{np} (this is
+  the common approach in the recommended text books):
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}90}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    \begin{itemize}
+\tightlist
+\item
+  NumPy arrays can be initialised with zeros or ones:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}95}]:} \PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+         \PY{n}{b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(} \PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)} \PY{p}{)} \PY{c+c1}{\PYZsh{} Note use of tuple for index list}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ 1.  1.  1.  1.]
+[[ 0.  0.  0.]
+ [ 0.  0.  0.]
+ [ 0.  0.  0.]]
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  NumPy arrays can be initialised as a unit matrix:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}97}]:} \PY{n}{c} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{c}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 1.  0.  0.  0.]
+ [ 0.  1.  0.  0.]
+ [ 0.  0.  1.  0.]
+ [ 0.  0.  0.  1.]]
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  A more general form of initialisation is as follows:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}99}]:} \PY{n}{row\PYZus{}vector} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(} \PY{p}{[}\PY{l+m+mf}{2.0}\PY{p}{,} \PY{l+m+mf}{2.4}\PY{p}{,} \PY{l+m+mf}{5.6}\PY{p}{]}\PY{p}{)}
+         \PY{n}{column\PYZus{}vector} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(} \PY{p}{[}\PY{p}{[}\PY{l+m+mf}{2.0}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{2.4}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{5.6}\PY{p}{]}\PY{p}{]} \PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{row\PYZus{}vector}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{column\PYZus{}vector}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ 2.   2.4  5.6]
+[[ 2. ]
+ [ 2.4]
+ [ 5.6]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}100}]:} \PY{n}{matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(} \PY{p}{[} \PY{p}{[}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{1.4}\PY{p}{,} \PY{l+m+mf}{4.3}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{3.2}\PY{p}{,} \PY{l+m+mf}{4.1}\PY{p}{,} \PY{l+m+mf}{2.3}\PY{p}{]} \PY{p}{]} \PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{matrix}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 1.   1.4  4.3]
+ [ 3.2  4.1  2.3]]
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  To create an array of equally spaced values, e.g.~for graph plotting,
+  use the \texttt{np.arange} and \texttt{np.linspace} functions.
+\item
+  For
+  \texttt{np.arange(\textless{}start\textgreater{},\ end,\ \textless{}increment\textgreater{})}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    start and increment are optional
+  \item
+    the array of values will end \emph{before} the end point
+  \item
+    \texttt{np.arange()} is like a more flexible form of the built-in
+    \texttt{range()} function
+  \end{itemize}
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}111}]:} \PY{n}{xvals} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)} \PY{c+c1}{\PYZsh{} Generates integers from 0 to \PYZlt{} 10}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{xvals}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0 1 2 3 4 5 6 7 8 9]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}112}]:} \PY{n}{xvals} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)} \PY{c+c1}{\PYZsh{} Generates integers from 2 to \PYZlt{} 10}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{xvals}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[2 3 4 5 6 7 8 9]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}113}]:} \PY{n}{xvals} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)} \PY{c+c1}{\PYZsh{} Generates even integers from 2 to \PYZlt{} 10}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{xvals}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[2 4 6 8]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}114}]:} \PY{n}{xvals} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{,}\PY{l+m+mf}{5.0}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{)} \PY{c+c1}{\PYZsh{} Generates floats every 0.5 from 1.0 to 4.5}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{xvals}\PY{p}{)}\PY{p}{)}\PY{p}{:}  \PY{c+c1}{\PYZsh{} len gives length of array xvals}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ xvals[}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{]: }\PY{l+s+si}{\PYZpc{}4.2f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{i}\PY{p}{,}\PY{n}{xvals}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+i: 0 xvals[0]: 1.00
+i: 1 xvals[1]: 1.50
+i: 2 xvals[2]: 2.00
+i: 3 xvals[3]: 2.50
+i: 4 xvals[4]: 3.00
+i: 5 xvals[5]: 3.50
+i: 6 xvals[6]: 4.00
+i: 7 xvals[7]: 4.50
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  For
+  \texttt{np.linspace(\textless{}start\textgreater{},\ end,\ \textless{}number\_steps\textgreater{})}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    the array of values will end \emph{exactly} at the end point
+  \item
+    the array will have exactly number\_steps entries
+  \item
+    This is very useful for graph plotting.
+  \item
+    For example:
+  \end{itemize}
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}115}]:} \PY{n}{xvals} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{,}\PY{l+m+mf}{5.0}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{xvals}\PY{p}{)}\PY{p}{)}\PY{p}{:}  \PY{c+c1}{\PYZsh{} len gives length of array xvals}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ xvals[}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{]: }\PY{l+s+si}{\PYZpc{}4.2f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{i}\PY{p}{,}\PY{n}{xvals}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+i: 0 xvals[0]: 1.00
+i: 1 xvals[1]: 2.33
+i: 2 xvals[2]: 3.67
+i: 3 xvals[3]: 5.00
+
+    \end{Verbatim}
+
+    \hypertarget{vectorization-a-really-useful-and-potentially-confusing-feature-of-numpy-arrays}{%
+\subsubsection*{5.1.5 Vectorization: a really useful (and potentially
+confusing) feature of NumPy
+arrays}\label{vectorization-a-really-useful-and-potentially-confusing-feature-of-numpy-arrays}}
+
+\begin{itemize}
+\tightlist
+\item
+  Let's say we have a 1-dimensional array of x values, and we want to
+  compute a function f(x) for each of them. We could:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Write a loop and evaluate each value of f(x) in turn (slow)
+  \item
+    Take advantage of the NumPy vectorisation to achieve it in one line
+    (fast)
+  \end{enumerate}
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{x} \PY{o}{+} \PY{l+m+mi}{1}  \PY{c+c1}{\PYZsh{} This line is an example of vectorisation}
+                           \PY{c+c1}{\PYZsh{} y is created as a numpy array and all its}
+                           \PY{c+c1}{\PYZsh{} entries are assigned in one go.}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.0 1.0
+0.1 1.11
+0.2 1.24
+0.30000000000000004 1.3900000000000001
+0.4 1.56
+0.5 1.75
+0.6000000000000001 1.9600000000000002
+0.7000000000000001 2.1900000000000004
+0.8 2.4400000000000004
+0.9 2.71
+1.0 3.0
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Vectorisation \textbf{only} works with NumPy arrays, not with Python
+  lists.
+\item
+  Vectorisation \textbf{only} works with the NumPy mathematical
+  functions, not the \texttt{math} ones i.e.~this works:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}124}]:} \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{)}
+          \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{x}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Must be the NumPy sin() function}
+          
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}6.4f}\PY{l+s+s2}{ }\PY{l+s+si}{\PYZpc{}6.4f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.0000 0.0000
+0.1571 0.1564
+0.3142 0.3090
+0.4712 0.4540
+0.6283 0.5878
+0.7854 0.7071
+0.9425 0.8090
+1.0996 0.8910
+1.2566 0.9511
+1.4137 0.9877
+1.5708 1.0000
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  But, \textbf{this does not work:}
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}125}]:} \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{)}
+          \PY{n}{y} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{x}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Must be the NumPy sin() function}
+          
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}6.4f}\PY{l+s+s2}{ }\PY{l+s+si}{\PYZpc{}6.4f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        TypeError                                 Traceback (most recent call last)
+
+        <ipython-input-125-d0bf67d7fdc7> in <module>()
+          1 x = np.linspace(0,np.pi/2,11)
+    ----> 2 y = math.sin(x)  \# Must be the NumPy sin() function
+          3 
+          4 for i in range(len(x)):
+          5     print("\%6.4f \%6.4f" \% (x[i],y[i]))
+
+
+        TypeError: only length-1 arrays can be converted to Python scalars
+
+    \end{Verbatim}
+
+    \hypertarget{reading-and-writing-to-files}{%
+\subsection{Reading and writing to
+files}\label{reading-and-writing-to-files}}
+
+The operation of reading or writing to a file consists of 3 stages:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Open the file: this requires specifying the filename and associating
+  this with a special file-type variable;
+\item
+  Perform the reads or writes, using the appropriate file-type variable
+  to specify the location;
+\item
+  Close the file: this tells the operating system we are done, and
+  ensures any final writes are completed.
+\end{enumerate}
+
+Files can be either text-based or raw binary. While binary files are
+more compact, text files have the advantage that they can be read by
+both computers and humans and are, therefore, the recommended type to
+use.
+
+\hypertarget{opening-and-closing-a-file}{%
+\subsubsection*{5.2.1 Opening and closing a
+file}\label{opening-and-closing-a-file}}
+
+\begin{itemize}
+\tightlist
+\item
+  To \texttt{open} a file i.e.~prepare it for reading and writing, use
+  the \texttt{open()} function.
+\item
+  To \texttt{close} the file again i.e.~finish any reading and writing
+  and leave the file ready for use in another application, use the
+  \texttt{close()} method of the file object.
+\item
+  Different modes (reading, writing etc) are available as follows. The
+  options `r', `w' and `a' will be the most useful:
+\end{itemize}
+
+\includegraphics[width=0.6\maxwidth]{textio.png}
+\begin{itemize}
+\tightlist
+\item
+  A further set of options, `rb', `wb', `ab' and `rb+' are available for
+  reading and writing binary files. These are best avoided as debugging
+  binary read/write operations can be very tricky.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}126}]:} \PY{n}{MyFileObject} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{anyfile.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} creates an empty file called `anyfile.txt\PYZsq{} }
+                                                  \PY{c+c1}{\PYZsh{} and prepares it for writing, \PYZsq{}w\PYZsq{}.}
+          \PY{n}{MyFileObject}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} closes the file again}
+\end{Verbatim}
+
+
+    \hypertarget{writing-to-files}{%
+\subsubsection*{5.2.2 Writing to files}\label{writing-to-files}}
+
+\begin{itemize}
+\tightlist
+\item
+  To write to a file, use a modified version of the \texttt{print()}
+  function.
+\item
+  Note that \texttt{print()} has two optional arguments, one to specify
+  the string separator, and the other the file object.
+\item
+  The following code generates a file with two columns separated by the
+  string \texttt{\textquotesingle{},\ \textquotesingle{}}.
+\item
+  To separate the columns with tabs, use the separation string
+  \texttt{\textquotesingle{}\textbackslash{}t\textquotesingle{}}.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}130}]:} \PY{n}{MyFileObject} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{anyfile.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{101}\PY{p}{)}
+          \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+          
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}6.4f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}6.4f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{, }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{file}\PY{o}{=}\PY{n}{MyFileObject}\PY{p}{)}
+          
+          \PY{n}{MyFileObject}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} closes the file again}
+\end{Verbatim}
+
+
+    \begin{itemize}
+\tightlist
+\item
+  Alternatively, could use: print(``\%6.4f, \%6.4f'' \%
+  (x{[}i{]},y{[}i{]}), file=MyFileObject)
+\end{itemize}
+
+    \hypertarget{reading-data-from-a-file}{%
+\subsubsection*{5.2.3 Reading data from a
+file}\label{reading-data-from-a-file}}
+
+\begin{itemize}
+\tightlist
+\item
+  For a given file object, the \texttt{read(n)} method reads n bytes.
+  This is not especially useful for text files, where a given number
+  could be represented by a varying number of bytes. If n is omitted,
+  the entire file is read in a single operation.
+\item
+  The \texttt{readline()} method is more useful for reading text files.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}134}]:} \PY{n}{MyFileObject} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{anyfile.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{MyFileObject}\PY{o}{.}\PY{n}{readline}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{end}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{MyFileObject}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0 0.0000, 0.0000
+1 0.0157, 0.0157
+2 0.0314, 0.0314
+3 0.0471, 0.0471
+4 0.0628, 0.0628
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Each use of \texttt{MyFileObject.readline()} reads one line from the
+  file.
+\item
+  The \texttt{end=\textquotesingle{}\textquotesingle{}} argument is
+  needed to prevent double spacing of the output (it gets rid of an
+  extra linefeed).
+\item
+  Alternatively, file objects are iterable, so \texttt{MyFileObject} can
+  be used to control a loop, reading the file, one line at a time.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}137}]:} \PY{n}{MyFileObject} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{anyfile.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{xvals}\PY{p}{,} \PY{n}{yvals} \PY{o}{=} \PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{]} \PY{c+c1}{\PYZsh{} Create two lists to hold the data}
+          
+          \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{MyFileObject}\PY{p}{:}
+              \PY{n}{fields} \PY{o}{=} \PY{n}{line}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}       \PY{c+c1}{\PYZsh{} split each line at the commas}
+              \PY{n}{xvals}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{fields}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} append the new x value to the list}
+              \PY{n}{yvals}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{fields}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} append the new y value to the list}
+              
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{yvals}\PY{p}{)}
+          
+          \PY{n}{MyFileObject}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0.0, 0.0157, 0.0314, 0.0471, 0.0628, 0.0785, 0.0941, 0.1097, 0.1253, 0.1409, 0.1564, 0.1719, 
+0.1874, 0.2028, 0.2181, 0.2334, 0.2487, 0.2639, 0.279, 0.294, 0.309, 0.3239, 0.3387, 0.3535, 
+0.3681, 0.3827, 0.3971, 0.4115, 0.4258, 0.4399, 0.454, 0.4679, 0.4818, 0.4955, 0.509, 0.5225, 
+0.5358, 0.549, 0.5621, 0.575, 0.5878, 0.6004, 0.6129, 0.6252, 0.6374, 0.6494, 0.6613, 0.673, 
+0.6845, 0.6959, 0.7071, 0.7181, 0.729, 0.7396, 0.7501, 0.7604, 0.7705, 0.7804, 0.7902, 0.7997, 
+0.809, 0.8181, 0.8271, 0.8358, 0.8443, 0.8526, 0.8607, 0.8686, 0.8763, 0.8838, 0.891, 0.898, 
+0.9048, 0.9114, 0.9178, 0.9239, 0.9298, 0.9354, 0.9409, 0.9461, 0.9511, 0.9558, 0.9603, 0.9646, 
+0.9686, 0.9724, 0.9759, 0.9792, 0.9823, 0.9851, 0.9877, 0.99, 0.9921, 0.994, 0.9956, 0.9969, 
+0.998, 0.9989, 0.9995, 0.9999, 1.0]
+
+    \end{Verbatim}
+
+    \hypertarget{numpy-functions-for-file-inputoutput}{%
+\subsubsection*{5.2.4 NumPy functions for file
+input/output}\label{numpy-functions-for-file-inputoutput}}
+
+\begin{itemize}
+\tightlist
+\item
+  You can also use the NumPy functions \texttt{np.loadtxt()} and
+  \texttt{np.savetxt()} for reading and writing text files of data.
+\item
+  Information on these may be found in the recommended textbooks, and on
+  the NumPy website: http://www.numpy.org.
+\end{itemize}
+
+    \hypertarget{plotting-graphs}{%
+\subsection{Plotting graphs}\label{plotting-graphs}}
+
+\hypertarget{line-plots-using-matplotlib-and-pylab}{%
+\subsubsection*{5.3.1 Line plots using Matplotlib and
+pylab}\label{line-plots-using-matplotlib-and-pylab}}
+
+\begin{itemize}
+\tightlist
+\item
+  Matplotlib is a sophisticated graphing module, with capabilities for
+  producing publication quality graphs, for journal articles, books etc.
+\item
+  pylab is a simple plotting interface to Matplotlib. We will focus on
+  use of pylab, through the following examples. Much more is possible;
+  see textbooks and the Matplotlib website (http://www.matplotlib.org)
+  for more information.
+\item
+  Here is a simple line plot:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} A plot of sin(x)/x}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} following line needed to get graphs to appear in Jupyter worksheet}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline 
+         \PY{k+kn}{import} \PY{n+nn}{pylab}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} Generate the x and y values to plot}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mf}{0.01}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{o}{/}\PY{n}{x}
+         
+         \PY{n}{pylab}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{pylab}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{5.5}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,}
+              \PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}f(x) = }\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{sin(x)/x\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{horizontalalignment}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)} \PY{c+c1}{\PYZsh{} Note the use of a LaTeX label}
+         \PY{n}{pylab}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{pylab}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{f(x)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{pylab}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} this command not always needed}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{output_184_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The following puts several lines together on one plot, using various
+plot styles:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} several graphs together on the same plot}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline 
+         \PY{k+kn}{import} \PY{n+nn}{pylab}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} Generate the x and y values to plot using Vectorisation}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{A} \PY{o}{=} \PY{l+m+mi}{8}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.01}\PY{p}{)}
+         \PY{n}{y1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{x}\PY{p}{)}\PY{o}{*}\PY{n}{A}
+         \PY{n}{y3} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{x}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{9}\PY{o}{*}\PY{n}{A}
+         \PY{n}{y5} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mi}{5}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{x}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{25}\PY{o}{*}\PY{n}{A}
+         \PY{n}{y7} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mi}{7}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{x}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{49}\PY{o}{*}\PY{n}{A}
+         \PY{n}{y9} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mi}{9}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{x}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{81}\PY{o}{*}\PY{n}{A}
+         \PY{n}{y} \PY{o}{=} \PY{n}{y1}\PY{o}{+}\PY{n}{y3}\PY{o}{+}\PY{n}{y5}\PY{o}{+}\PY{n}{y7}\PY{o}{+}\PY{n}{y9}
+         
+         \PY{n}{pylab}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{pylab}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{pylab}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y3}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{pylab}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y5}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{pylab}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y7}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{pylab}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y9}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{pylab}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{pylab}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{f(x)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{pylab}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{pylab}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} this command not always needed}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{output_186_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{dimensional-plots}{%
+\subsubsection*{5.3.2 3-dimensional plots}\label{dimensional-plots}}
+
+\begin{itemize}
+\tightlist
+\item
+  Various types of 3-d plots are possible, but you first need to import
+  the Axes3D module from Matplotlib to create the appropriate set of
+  axes:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline 
+         
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{mpl\PYZus{}toolkits}\PY{n+nn}{.}\PY{n+nn}{mplot3d} \PY{k}{import} \PY{n}{Axes3D}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} Create a figure with 3D axes}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{MyFig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{Axes3D}\PY{p}{(}\PY{n}{MyFig}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} Generate a plot, using the plot method of the axes}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{5}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{,} \PY{l+m+mi}{501}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{theta}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{theta}\PY{p}{)}\PY{p}{,} \PY{n}{theta}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot} \PY{p}{(}\PY{l+m+mf}{0.5}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{theta}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{theta}\PY{p}{)}\PY{p}{,} \PY{n}{theta}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:} [<mpl\_toolkits.mplot3d.art3d.Line3D at 0x11655b160>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{output_188_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    If you use Axes3D from within Spyder, the graph should appear in a
+separate window and you will be able to change the view by dragging with
+the mouse. 
+\subsubsection*{5.3.3 Contour plots}
+\begin{itemize}
+\item  First you need to create a 2-d
+mesh of points \item The contour plot is then straightforward:
+
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline 
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} Adapted from Kinder and Nelson, 2015}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} Create a grid of x and y values, }
+         \PY{c+c1}{\PYZsh{} using the linspace and meshgrid functions}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{51}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{31}\PY{p}{)}
+         \PY{n}{X}\PY{p}{,} \PY{n}{Y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} Use vectorisation to generate function values}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{MyFunc} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{X}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{Y}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} Plot and label the contours}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{MyContours} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{contour}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{MyFunc}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{linewidths}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{colors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{clabel}\PY{p}{(}\PY{n}{MyContours}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{output_190_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  Sometimes it is more appropriate to view the data as an intensity
+  plot. This can be achieved as follows:
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline 
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} Adapted from Kinder and Nelson, 2015}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{cm}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} Create a grid of x and y values, }
+         \PY{c+c1}{\PYZsh{} using the linspace and meshgrid functions}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{51}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{31}\PY{p}{)}
+         \PY{n}{X}\PY{p}{,} \PY{n}{Y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} Use vectorisation to generate function values}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{MyFunc} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{X}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{Y}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} Plot the function as an intensity map}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{MyFunc}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{cm}\PY{o}{.}\PY{n}{coolwarm}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}50}]:} <matplotlib.image.AxesImage at 0x116347b00>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{output_192_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{surface-plots}{%
+\subsubsection*{5.3.4 Surface Plots}\label{surface-plots}}
+
+\begin{itemize}
+\tightlist
+\item
+  As previously, the Axes3D module is needed
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline 
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} Adapted from Kinder and Nelson, 2015}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{cm}
+         \PY{k+kn}{from} \PY{n+nn}{mpl\PYZus{}toolkits}\PY{n+nn}{.}\PY{n+nn}{mplot3d} \PY{k}{import} \PY{n}{Axes3D}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} Create a grid of x and y values, }
+         \PY{c+c1}{\PYZsh{} using the linspace and meshgrid functions}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{points} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{101}\PY{p}{)}
+         \PY{n}{X}\PY{p}{,} \PY{n}{Y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{points}\PY{p}{,} \PY{n}{points}\PY{p}{)}
+         \PY{n}{Z} \PY{o}{=} \PY{n}{X}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{Y}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} create and display surface plot}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{Axes3D}\PY{p}{(}\PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot\PYZus{}surface}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{Z}\PY{p}{,} \PY{n}{rstride}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{cstride}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{cm}\PY{o}{.}\PY{n}{coolwarm}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{output_194_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{another-exercise-linear-least-squares}{%
+\section{Another Exercise: Linear least
+squares}\label{another-exercise-linear-least-squares}}
+
+With everything you have now learnt, have a go at the following
+exercise.
+
+The method of least squares is well known and can be found online or in
+a good statistics text book. Your aim, in this optional exercise, is to
+write a program that can read in a text based data file, which contains
+an unknown number of data points, and fit the data to a linear (straight
+line) form.
+
+\begin{itemize}
+\item
+  The format of the data file is \(x\), \(y\), \(\sigma_x, \sigma_y\)
+  where \(\sigma_x, \sigma_y\) are the errors on the \(x\) and \(y\)
+  values.
+\item
+  The data should be read in from the file and then the various sums
+  calculated so that the \(m\) and \(c\) coefficients (in \(y=mx+c\))
+  and their associated error can be computed (note that the error in
+  \(x\) is not used in this analysis method).
+\item
+  Read the data into an array before performing the sums, to get
+  practice in using arrays.
+\item
+  Try to make the program modular so that there is:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    a separate function for reading in the data (takes a filename as an
+    argument and returns an array with the data and the number of
+    datapoints), and
+  \item
+    a function for calculating the least squares coefficients (takes the
+    array of data and the number of points as arguments and returns the
+    coefficients and errors).
+  \end{enumerate}
+\item
+  The structure of the main part of the code might look something like:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Ask user to input filename from keyboard
+  \item
+    Call function to read in data from file (check the file was actually
+    found and read in correctly)
+  \item
+    Call the function to calculate the coefficients
+  \item
+    Display coefficients on the screen
+  \item
+    Plot a graph showing the data points and the straight line fit.
+  \end{enumerate}
+\item
+  For testing proposes use your program to fit the following data files
+  which can be downloaded from the course web site:
+
+\begin{verbatim}
+  LinearTestdata.TXT 
+  LargeDataSet.TXT
+\end{verbatim}
+\item
+  The expected results for each of the data sets can be found in the
+  file: \texttt{TestResults.txt}.
+\end{itemize}
+
+    \hypertarget{appendix-a-optional-section-arduino-programming-from-python}{%
+\section*{Appendix A (Optional Section) Arduino programming from
+Python}\label{appendix-a-optional-section-arduino-programming-from-python}}
+\addcontentsline{toc}{section}{Appendix A (Optional Section) Arduino programming from
+Python}
+\hypertarget{a.1-introduction}{%
+\renewcommand{\thesubsection}{A.\arabic{subsection}}
+\subsection{Introduction}\label{a.1-introduction}}
+
+If you have never heard of the Arduino system for interfacing computers
+to experiments and other ``real-world'' devices, then you probably
+should read no further. However, you may have come across the Arduino as
+a hobbyist, or you may be planning a project (undergraduate or
+otherwise) that involves using an Arduino to control some piece of
+apparatus. In that case, the following notes are intended to give a
+flavour of what is possible, and to point you in the right direction to
+get started. There are many different approaches to using the Arduino
+from Python. The following is just one possibility that satisfies the
+most basic requirements.
+
+    \hypertarget{a.2-the-arduino-programming-model}{%
+\subsection{The Arduino programming
+model}\label{a.2-the-arduino-programming-model}}
+
+The Arduino is a self-contained microcontroller board, that ``talks'' to
+a host computer via some sort of interface. Typically, the interface
+will be a USB cable, but there are other possibilities including
+ethernet, Bluetooth and Wifi. The Arduino consists of a very basic
+microprocessor, some memory and a number of input/output (I/O) pins,
+which are used to connect to the real world. The Arduino can be used to
+send and receive signals via these pins.
+
+This is the typical appearance of an entry level Arduino UNO:
+
+\includegraphics[scale=1.0]{ArduinoUno.jpg}
+
+The normal mode of operation for the Arduino is to upload a program
+(known as a Sketch) to the device, and allow it to run in a loop in an
+autonomous fashion. The Sketch is written in the C programming language,
+and is uploaded to the Arduino using the Arduino IDE. Interaction with
+the Arduino will only be possible if the Sketch includes the provision
+to send and receive data over the interface; a separate program running
+on the computer is required to monitor the interface, either logging
+data or sending control signals as appropriate. It is this separate
+control program which may be written in Python.
+
+Unless you have some very specific requirements for your interface, it
+is simplest to use a pre-existing standalone Arduino Sketch, and focus
+your efforts on the Python control program. We give some basic examples
+of this below.
+
+    \hypertarget{a.3-preparing-the-arduino-board}{%
+\subsection{Preparing the Arduino
+board}\label{a.3-preparing-the-arduino-board}}
+
+These instructions relate to the Arduino UNO board; other boards will
+follow a similar pattern.
+
+First it is necessary to install the Arduino IDE, available from
+https://www.arduino.cc/en/Main/Software . Once installed, the Arduino
+board should be connected to a USB port of the computer, and the Arduino
+IDE started. From the IDE menu, you should select: 
+\begin{itemize}\tightlist
+\item From
+\texttt{"Tools\ -\/-\textgreater{}\ Board..."} choose the appropriate
+board type. \item From \texttt{"Tools\ -\/-\textgreater{}\ Port..."} choose
+the port your Arduino is connected to. This will vary depending on the
+computer type, and will typically be of the form: \begin{itemize}\tightlist
+\item 
+\texttt{"/dev/cu.usbmodemxxx"} for a Mac \item \texttt{"/dev/ttyACMxx"} for
+Linux \item \texttt{"COMx"} for a PC
+
+\end{itemize}
+
+\end{itemize}
+
+Finally, the standalone Sketch is required. We will use the Firmata
+protocol for communicating with the Arduino; an appropriate Sketch for
+this is available within the IDE at
+\texttt{"File\ -\/-\textgreater{}\ Examples\ -\/-\textgreater{}\ Firmata\ -\/-\textgreater{}\ StandardFirmata"}.
+Load this Sketch, compile it using
+\texttt{"Sketch\ -\/-\textgreater{}\ Verify/Compile"} and upload it to
+the Arduino using ```Sketch --\textgreater{} Upload''.
+
+    \hypertarget{a.4-pyserial-and-pyfirmata}{%
+\subsection{pySerial and
+pyFirmata}\label{a.4-pyserial-and-pyfirmata}}
+
+Communication between the host computer and the Arduino will be handled
+using the Firmata protocol. This is available as a module, pyFirmata,
+which is available within Python. pyFirmata is, in turn, dependent on a
+serial communications module, known as pySerial. Neither of these
+modules are available within the standard Anaconda-based installation,
+so a little effort is required to install them.
+
+In fact, pySerial is known to Anaconda, and a single command is
+sufficient to install it i.e.: * conda install pyserial
+
+at the command prompt. Once pySerial is installed, verify that Python
+knows about it by typing the following command at the IPython prompt:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{serial}
+\end{Verbatim}
+
+
+    There should be no error messages. pyFirmata is available from
+https://pypi.python.org/pypi/pyFirmata/1.0.3 . Download the package and
+follow the installation instructions. Once pyFirmata is installed,
+verify that Python knows about it by typing the following command at the
+IPython prompt:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{pyfirmata}
+\end{Verbatim}
+
+
+    If there are no error messages, your Python installation is ready to
+address the Arduino.
+
+    \hypertarget{a.5-simple-arduino-test}{%
+\subsection{Simple Arduino test}\label{a.5-simple-arduino-test}}
+
+At the start of each Python program addressing the Arduino, you will
+need to setup the port and board type as follows:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{port} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/dev/cu.usbmodem1411}\PY{l+s+s1}{\PYZsq{}}  \PY{c+c1}{\PYZsh{} substitute your port name here}
+        \PY{n}{board} \PY{o}{=} \PY{n}{pyfirmata}\PY{o}{.}\PY{n}{Arduino}\PY{p}{(}\PY{n}{port}\PY{p}{)}  \PY{c+c1}{\PYZsh{} this identifies the Arduino attached to your port}
+        \PY{n}{pin} \PY{o}{=} \PY{l+m+mi}{13}  \PY{c+c1}{\PYZsh{} choose pin number 13}
+\end{Verbatim}
+
+
+    The Arduino UNO has a test LED permanently attached to output pin 13 of
+the board. The following lines can be used to toggle the LED on:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{board}\PY{o}{.}\PY{n}{digital}\PY{p}{[}\PY{n}{pin}\PY{p}{]}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}  \PY{c+c1}{\PYZsh{} setting pin 13 to \PYZsq{}HIGH\PYZsq{}, LED is on}
+\end{Verbatim}
+
+
+    and off:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{board}\PY{o}{.}\PY{n}{digital}\PY{p}{[}\PY{n}{pin}\PY{p}{]}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}  \PY{c+c1}{\PYZsh{} setting pin 13 to \PYZsq{}LOW\PYZsq{}, LED is off}
+\end{Verbatim}
+
+
+    The state of pin 13 may be read at any time using the command:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{board}\PY{o}{.}\PY{n}{digital}\PY{p}{[}\PY{n}{pin}\PY{p}{]}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} read the digital value of pin 13}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} 0
+\end{Verbatim}
+            
+    \hypertarget{a.6-a-program-to-control-an-led}{%
+\subsection{A program to control an
+LED}\label{a.6-a-program-to-control-an-led}}
+
+The following program uses pulse-width modulation (PWM) to control the
+intensity of an LED attached to one of the digital outputs of the
+Arduino. To see the effect of this program you will need to connect an
+LED between pin 11 of the Arduino and Ground, via a small resistor (say
+220\(\Omega\)). The program causes the LED to pulse smoothly five times.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k+kn}{from} \PY{n+nn}{pyfirmata} \PY{k}{import} \PY{n}{Arduino}\PY{p}{,} \PY{n}{PWM}
+         \PY{k+kn}{from} \PY{n+nn}{time} \PY{k}{import} \PY{n}{sleep}
+         \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{n}{sin}\PY{p}{,} \PY{n}{pi}
+         
+         \PY{n}{port} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/dev/cu.usbmodem1411}\PY{l+s+s1}{\PYZsq{}} \PY{c+c1}{\PYZsh{} Change this for your particular installation}
+         \PY{n}{board} \PY{o}{=} \PY{n}{Arduino}\PY{p}{(}\PY{n}{port}\PY{p}{)}
+         
+         \PY{n}{sleep}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Allow time for the Arduino to initialise}
+         
+         \PY{n}{pin} \PY{o}{=} \PY{l+m+mi}{11}
+         \PY{n}{board}\PY{o}{.}\PY{n}{digital}\PY{p}{[}\PY{n}{pin}\PY{p}{]}\PY{o}{.}\PY{n}{mode} \PY{o}{=} \PY{n}{PWM}  \PY{c+c1}{\PYZsh{} Setup pin 11 to use PWM}
+         
+         \PY{n}{period} \PY{o}{=} \PY{l+m+mi}{50}  \PY{c+c1}{\PYZsh{} Sets the duration of each pulse}
+         \PY{n}{number} \PY{o}{=} \PY{l+m+mi}{5}  \PY{c+c1}{\PYZsh{} Sets the number of pulses}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{number}\PY{o}{*}\PY{n}{period}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+             \PY{n}{board}\PY{o}{.}\PY{n}{digital}\PY{p}{[}\PY{n}{pin}\PY{p}{]}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{sin}\PY{p}{(}\PY{n}{i}\PY{o}{*}\PY{n}{pi}\PY{o}{/}\PY{n}{period}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{c+c1}{\PYZsh{} Sinusoidal intensity variation}
+             \PY{n}{sleep}\PY{p}{(}\PY{l+m+mf}{0.05}\PY{p}{)}
+             \PY{k}{if} \PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{n}{period}\PY{p}{)}\PY{o}{*}\PY{n}{period} \PY{o}{==} \PY{n}{i}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{o}{*}\PY{l+m+mi}{100}\PY{o}{/}\PY{p}{(}\PY{n}{number}\PY{o}{*}\PY{n}{period}\PY{p}{)}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{} d}\PY{l+s+s2}{one}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Give progress statement}
+         
+         \PY{n}{board}\PY{o}{.}\PY{n}{digital}\PY{p}{[}\PY{n}{pin}\PY{p}{]}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Finally set output to zero}
+         \PY{n}{board}\PY{o}{.}\PY{n}{exit}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Tidy closure of Arduino}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.0 \% done
+20.0 \% done
+40.0 \% done
+60.0 \% done
+80.0 \% done
+100.0 \% done
+
+    \end{Verbatim}
+
+    \hypertarget{a.7-logging-data-to-file-and-screen}{%
+\subsection{Logging data to file and
+screen}\label{a.7-logging-data-to-file-and-screen}}
+
+This program illustrates reading a voltage from one of the analog input
+pins of the Arduino. This might be, for example, the output from some
+sort of sensor.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k+kn}{from} \PY{n+nn}{pyfirmata} \PY{k}{import} \PY{n}{Arduino}\PY{p}{,} \PY{n}{util}
+         \PY{k+kn}{from} \PY{n+nn}{time} \PY{k}{import} \PY{n}{sleep}
+         
+         \PY{n}{port} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/dev/cu.usbmodem1411}\PY{l+s+s1}{\PYZsq{}}  \PY{c+c1}{\PYZsh{} Change this for your particular installation}
+         \PY{n}{board} \PY{o}{=} \PY{n}{Arduino}\PY{p}{(}\PY{n}{port}\PY{p}{)}
+         
+         \PY{n}{sleep}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Allow time for the Arduino to initialise}
+         
+         \PY{n}{it} \PY{o}{=} \PY{n}{util}\PY{o}{.}\PY{n}{Iterator}\PY{p}{(}\PY{n}{board}\PY{p}{)} \PY{c+c1}{\PYZsh{} These two lines prevent the serial buffer from overflowing}
+         \PY{n}{it}\PY{o}{.}\PY{n}{start}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{sleep}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Allow time for the Arduino to catch up}
+         
+         \PY{n}{pin} \PY{o}{=} \PY{l+m+mi}{0}  \PY{c+c1}{\PYZsh{} Choose one of the analog pins as input}
+         \PY{n}{samples} \PY{o}{=} \PY{l+m+mi}{10} \PY{c+c1}{\PYZsh{} Set number of samples to take}
+         
+         \PY{n}{board}\PY{o}{.}\PY{n}{analog}\PY{p}{[}\PY{n}{pin}\PY{p}{]}\PY{o}{.}\PY{n}{enable\PYZus{}reporting}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Enable reading from the chosen pin}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{samples}\PY{p}{)}\PY{p}{:}
+             \PY{n}{sleep}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sample: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{i}\PY{p}{,}\PY{n}{board}\PY{o}{.}\PY{n}{analog}\PY{p}{[}\PY{n}{pin}\PY{p}{]}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} Read a value and print it}
+         
+         \PY{n}{board}\PY{o}{.}\PY{n}{analog}\PY{p}{[}\PY{n}{pin}\PY{p}{]}\PY{o}{.}\PY{n}{disable\PYZus{}reporting}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Disable reading from the chosen pin}
+         \PY{n}{board}\PY{o}{.}\PY{n}{exit}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Tidy closure of Arduino}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Sample:  0 0.7107
+Sample:  1 0.6647
+Sample:  2 0.5904
+Sample:  3 0.4936
+Sample:  4 0.3812
+Sample:  5 0.2776
+Sample:  6 0.39
+Sample:  7 0.6628
+Sample:  8 0.7752
+Sample:  9 0.7771
+
+    \end{Verbatim}
+
+    \hypertarget{a.8-final-points}{%
+\subsection{Final points}\label{a.8-final-points}}
+
+\begin{itemize}
+\tightlist
+\item
+  If the above programs fail to execute from within the Jupyter
+  notebook, the simplest solution is often to copy the code into a
+  separate script file and execute it from the command line.
+\item
+  The Firmata protocol is only one of many that perform similar
+  operations on the Arduino. More are available from the Arduino IDE
+  menu.
+\item
+  An alternative python interface to work with the Firmata protocol is
+  provided by the PyMata module, available from
+  https://pypi.python.org/pypi/PyMata/2.17 .
+\end{itemize}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

@@ -1,0 +1,49 @@
+# hw17342 Harry Wiseman 2nd year physics student
+import math
+def MyArcTan(x,N):
+    pi = math.pi                                        #pi 
+    S1 = 0                                              #First Taylor series of arctan
+    S2 = 0                                              #second Taylor series of arctan
+    if (abs(x)<=1):
+        for n in range(0,N+1):                          #Setting the range of 0 to N+1
+            S1 += ((-1)**n)*(x**(2*n+1))/(2*n+1)         #the equation for arctan stated in 
+    elif (x>1):                                 
+        for n in range(0,N+1):
+            S2 += -((-1)**n)*((x)**(-2*n-1))/(2*n+1) 
+            S1 = (pi/2) +S2
+    else:
+        for n in range(0,N+1):                    
+            S2 += -((-1)**n)*((x)**(-2*n-1))/(2*n+1) 
+            S1 = -(pi/2) +S2
+    return S1
+
+MyInput = '0'
+while MyInput != 'quit':
+    MyInput = input('Enter a choice, "a", "b", "c" or "q" to quit: ')
+    print('You entered the choice: ',MyInput)
+
+    if MyInput == 'a':
+        print('You have chosen part (a)')
+        Input_x = input('Please enter a value for x (floating point number): ')
+        x = float(Input_x)
+        Input_N = input('Please enter a value for N (positive integer): ')
+        N = int(Input_N)
+        print('The answer is: ',MyArcTan(x,N))
+
+    elif MyInput == 'b':
+        print('You have chosen part (b)')
+        Input_N = input('Please enter a value for N (positive integer): ')
+        N = int(Input_N)
+        t = math.atan(x)
+        print("The table below shows the approximations for taylor series of arctan(x) for N=",N)
+        print(" Value of x   | My value of actan(x) | Actual value of actan(x) | The difference between them |")
+       
+        for x in range (-2,3):
+            
+            t = math.atan(x)
+            print("   {:.2f}    |    {:.15f}    |    {:.15f}    |    {:.15f} ".format(x, MyArcTan(x,N), t,abs(MyArcTan(x,N)-t)))
+
+    elif MyInput != 'q':
+        print('This is not a valid choice')
+        
+print('You have chosen to finish - goodbye.')

@@ -1,0 +1,210 @@
+'''Harry Wiseman Exercise 2 "Fresnel diffraction using simpsons rule'''
+
+import numpy as np                                 #numpy allows us to use pi
+from matplotlib import pyplot as plt               #Required for all graphs plotted
+from scipy.integrate import simps                  #Used for part c&d
+    
+def Simpson(x,x_1,x_2,N):                           #Defining the simpsons rule function and the parameters used in the brackets
+                                
+    SR = 0.0                                        #Simpsons rule sdtarting value    
+    
+    first_value = np.exp(((1j*k)/(2*z))*(x-x_1)**2)        #First value f(a)
+    
+    last_value = np.exp(((1j*k)/(2*z))*(x-x_2)**2)         #Last value f(b)
+    
+    if x_1 > x_2:                                           #Lower limit has to be larger than upper limit
+        print ('Incorrect bounds')                          #Preventing errors
+        return None
+    if N%2 != 0:                                            #Another if statement because the to events aren't linked. This finds the remainder of N(%), and sees if its not equal to zero(!=), if the remainder isnt zero must be odd number therefore noit valid
+        print ('Invalid choice of N')
+        return None
+    else:                                                   #So for even integer N values
+        h = (x_2 - x_1)/N 
+        sum_odd = 0.0                                       #The initial sum for the odd function values
+        sum_even = 0.0                                      #The initial sum for the odd function values
+        for i in range(1, N//2 + 1):                        #Range for all the odd values using floor divide (//)
+            sum_odd += np.exp(((1j*k)/(2*z))*(x-(x_1+2*(i)*h))**2)
+        for i in range(1, N//2):                            #Range integer for all the even values
+            sum_even += np.exp(((1j*k)/(2*z))*(x-(x_1+(2*i*h)))**2)
+      
+    SR = (h /3.0)*((first_value + last_value) + 4*sum_odd + 2*sum_even)       #Total sum (Electric field)
+       
+    return SR
+def xIntegral(x,z,k,N,x_1prime,x_2prime):                   #Defining new function for part c
+    Xvalues = []                                            #Array for the x values
+    x_prime = np.linspace(x_1prime, x_2prime, N+1)          #Returns evenly spaced numbers over a specified interval, np.linespace(start,end,intervals)
+    for i in range(N+1):
+            Xvalues.append(np.exp(((1j*k)/(2*z))*(x-(x_prime[i]))**2))
+        
+    return simps(Xvalues, x_prime)
+        
+def yIntegral(y,z,k,N,y_1,y_2):                             #Defining new function for part c for the y axis   
+        Yvalues = []                                        #Array for the y value
+        y_prime = np.linspace(y_1, y_2, N+1)
+        
+        for i in range(N+1):
+            Yvalues.append(np.exp(((1j*k)/(2*z))*(y-(y_prime[i]))**2))
+        
+        return simps(Yvalues, y_prime)
+MyInput = '0'
+while MyInput != 'q':                                       #This while loop creates my menu for people using the code to add values 
+    MyInput = input('Enter a choice, "a", "b", "c", "d" or "q" to quit: ')
+    print('You entered the choice: ',MyInput)
+
+    '''Part a the user can only see the 1-Dimentional Fraunhofer(far-field) 
+       diffraction pattern, they cannot put in any values at this point'''
+    
+    if MyInput == 'a':
+        print('You have chosen part (a)')
+        print('z=0.02m,  N=100,  wavelength=100nm,  screencoordinate -5mm to 5mm,  apeture 0.00002')
+        x_1 = 0
+        x_2 = 2E-5                              #Apertureas
+        N = 100
+        x = 0.005                               #Atual x coordinate of screen (in x axis)
+        z = 0.02                                #Distance from the screen to apeture
+        wavelength = 1E-06
+        k = 2*np.pi/wavelength                  #K is the wavenumber
+        panels = 100                            #Number of points (large values of this slows programme down)
+        x_min = -5E-03                          ##Screen width
+        x_max = 5E-03                           
+        xvals = np.linspace(x_min,x_max,panels) #Screen coordinates
+        yvals = []                              #Empty list (saying yvals is a list)
+        for i in range(panels): yvals.append((Simpson(xvals[i],x_1,x_2,N)))
+        Intensity = np.array(yvals) * np.conjugate(np.array(yvals))
+        plt.plot(xvals,Intensity)
+        plt.xlabel('screen coordinate (m)')
+        plt.ylabel('Relative Intensity')
+        plt.title('Part A')
+        plt.show()                              #Plots graph A
+      
+        '''Part b allows the user to put their own values to produce 1-Dimentional
+           Fraunhofer(far-field) diffraction pattern'''
+        
+    elif MyInput == 'b':                                                #Line 80-85 are conidtional input statements for the user lines 87-89 prevent any errors if wrong numbers or characters used
+        input_N = input("Enter a value for the number of iteravals (N): ")
+        input_x_2 = input("Enter an apeture width (in meters): ")
+        input_xcoordinate = input("Enter the width of screen coordinate in meters :")
+        input_z = input("Enter distance from the screen to the apeture in meters: ")
+        input_wavelength = input("Enter wavelength in meters: ")
+        
+        if (input_N.isnumeric() and 2 <= float(input_N) and  input_x_2.isnumeric() and input_z.isnumeric       #making sure only valid inputs allowed
+        and float(input_N) != 0 and float(input_x_2) != 0 and float(input_z) != 0 and float(input_wavelength) != 0):
+            x_1 = 0
+            x_2 = float(input_x_2)                                      #Optional aperture width
+            N = int(input_N)
+            z = float(input_z)                                          #Distance from the screen
+            k = (2*np.pi/float(input_wavelength))                       #K is the wavenumber
+            panels = 100
+            x_min = (-(float(input_xcoordinate))/2)                     
+            x_max = (float(input_xcoordinate)/2)                        
+            xvals = np.linspace(x_min,x_max,panels)                     #Screen coordinates
+            yvals = []                                                  #Empty list (saying yvals is a list)
+            for i in range(panels): yvals.append((Simpson(xvals[i],x_1,x_2,N)))
+            Intensity = np.array(yvals) * np.conjugate(np.array(yvals))
+            plt.plot(xvals,Intensity)
+            plt.xlabel('screen coordinate (m)')
+            plt.ylabel('Relative Intensity')
+            plt.title('part B')
+            plt.show()
+        
+        else: print("One of the values you have entered is invalid.")
+        
+        '''Part C produces an intensity plot using nested for loops and arrays, 
+           also allowing the user to put values to see different plots'''
+                  
+    elif MyInput == "c":
+        print('You have chosen part(c)')
+        input_N = input("Enter a value for the number of intervals (N): ")
+        input_x_2 = input("Enter an apeture width in nanometres : ")
+        input_xcoordinate = input("Enter the screen coordinate total width in mm:")
+        input_z = input("Enter distance from the screen to the apeture in meters: ")
+        input_wavelength = input("Enter wavelength in nanometers: ")
+        input_panels = input("enter the number of points :")
+        
+        if (input_N.isnumeric() and 2 <= float(input_N) and  input_x_2.isnumeric() and input_z.isnumeric       #making sure only valid inputs allowed
+        and float(input_N) != 0 and float(input_x_2) != 0 and float(input_z) != 0 and float(input_wavelength)
+        and float(input_panels) !=0 and input_panels.isnumeric):
+        
+        
+            N = int(input_N)
+            x_1 = float(input_x_2)
+            x_2 = float(input_x_2)                              
+            x_min = float(input_xcoordinate)                 
+            x_max = float(input_xcoordinate)
+            z = float(input_z)
+            wavelength = float(input_wavelength)
+            panels = int(input_panels)
+            x_1 *= (-0.000000001)/2
+            x_2 *= (0.000000001)/2
+            x_min *= (-0.001)/2
+            x_max *= (0.001)/2
+            k = 2*np.pi/(0.000000001*wavelength)
+        
+        
+            h = 4.0*np.pi / (panels - 1)         
+            intensity = np.zeros( (panels,panels) )
+            xvals = np.linspace(x_min,x_max,panels)
+            yvals = np.linspace(x_min,x_max, panels)
+            for i in np.arange(panels):                
+                xpart = xIntegral(xvals[i],z,k,N,x_1,x_2)
+                for j in np.arange(panels):
+                    ypart = yIntegral(yvals[j],z,k,N,x_1,x_2)       #change x_1 to y_2 and give valyes for part D
+                    field = xpart*ypart
+                    #integral = xIntegral(xpart, ypart)
+                    intense = (field * field.conjugate()).real
+                        # assigns value of intensity
+                    intensity[i][j] = intense
+                
+            # subplot creates square plot
+            graph = plt.figure().add_subplot(111)
+            graph.set_xlabel("$x$")
+            graph.set_ylabel("$y$")
+            
+            # cmap determines the colour as inverse greyscale
+            plt.imshow(intensity, extent=[x_min, x_max, x_min, x_max], cmap="plasma")
+            plt.show()
+            
+        else: print("One of the values you have entered is invalid.") 
+        
+        '''Part d is a retangular apeture''' 
+           
+    elif MyInput == "d":
+        print('You have chosen part(d)')
+        
+        print('please wait why the plot loads')
+        x_1 = -0.5E-5
+        x_2 = 0.5E-5
+        y_1 = -1.5E-5
+        y_2 = 1.5E-5
+        N = 100
+        z = 0.00002
+        wavelength = 1E-06
+        k = 2*np.pi/wavelength                  
+        panels = 100
+        x_min = -2E-05                          
+        x_max = 2E-05   
+        h = 4.0*np.pi / (panels - 1) 
+        intensity = np.zeros( (panels,panels) )
+        xvals = np.linspace(x_min,x_max,panels)
+        yvals = np.linspace(x_min,x_max, panels)
+        for i in np.arange(panels):
+            xpart = xIntegral(xvals[i],z,k,N,y_1,y_2)
+            for j in np.arange(panels):
+                ypart = yIntegral(yvals[j],z,k,N,x_1,x_2)       #Changed x_1 to y_2 and give valyes for part D
+                field = xpart*ypart
+                intense = (field * field.conjugate()).real      #Assigned a value of intensity
+                intensity[i][j] = intense
+            
+                                                                #This creates a square subplot plot
+        graph = plt.figure().add_subplot(111)
+        graph.set_xlabel("$x$")
+        graph.set_ylabel("$y$")
+        
+                                                                # cmap determines the colour as inverse plasma
+        plt.imshow(intensity, extent=[x_min, x_max, x_min, x_max], cmap="plasma")
+        plt.show()
+        
+    elif MyInput == "q":    
+        print('You have chosen to finish - goodbye xxx.') 
+    
+    elif MyInput != 'q'or'a'or'b'or'c'or'd': print('This is not a valid choice')    #This statement tells the user when they put an invalid character in 
